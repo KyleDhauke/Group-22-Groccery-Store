@@ -1,0 +1,24 @@
+{% macro page_numbers(pagenum, totalpages, uri) -%}
+  <div class="pagenav">
+    {% set min = pagenum - 2 if pagenum > 3 else 1 %}
+    {% set max = pagenum + 3 if pagenum < totalpages - 1 else (totalpages + (totalpages - pagenum) if pagenum != totalpages else totalpages + 1) %}
+
+    {% if min > 1 %}
+      <a href="{{ url_for(uri, page=1) }}" alt="Go to page 1">1</a>
+      ...
+    {% endif %}
+        
+    {% for i in range(min, max) %}
+      {% if pagenum == i %}
+        <strong>{{ pagenum }}</strong>
+      {% else %}
+        <a href="{{ url_for(uri, page=i) }}" alt="Go to page {{ i }}">{{ i }}</a>
+      {% endif %}
+    {% endfor %}
+    
+    {% if max < totalpages + 1 %}
+      ...
+      <a href="{{ url_for(uri, page=totalpages) }}" alt="Go to page {{ totalpages }}">{{ totalpages }}</a>
+    {% endif %}
+  </div>
+{%- endmacro %}

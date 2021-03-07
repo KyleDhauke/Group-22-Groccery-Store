@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<head>
+	<title>Sign in</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Stylesheets/login.css') }}">
+</head>
+<body>
+
+<form class="form-container" method="POST" action="">
+    {{ form.csrf_token }}
+	<div class="user-img"></div>
+		<ul class="list">
+			<br><br><br>
+			<li><h2>Sign in</h2></li>
+			<br>
+			<br>
+			<li>
+              {{ form.email.label }}</li>
+							<li>
+              {{ form.email }}
+            </li>
+			<li>
+              {{ form.password.label }}</li><li>
+              {{ form.password }}
+            </li>
+			<br>
+			<br>
+			<li><a href="{{ url_for('home') }}"><input type="submit" value="Login"></a></li>
+			<br>
+			<li><a href="{{ url_for('register') }}"><h3>CREATE ACCOUNT</h3></a></li> 
+		</ul>
+
+
+</body>
+{% endblock content %}

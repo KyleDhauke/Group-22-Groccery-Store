@@ -1,0 +1,11 @@
+
+.content {
+  margin-top: 6em;
+  text-align: center;
+  width: 100%;
+}
+
+.content h1 {
+  color: red;
+  font-size: 36pt;
+}
