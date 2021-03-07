@@ -17,22 +17,7 @@
         <img id="banner" align="center" src="{{ url_for('static',filename='Media/banner.png') }}">
       </div>
 
-      <nav>
-        <div class="navleft">
-          <a href="{{ url_for('home') }}">Home</a>
-          <a href="{{ url_for('products') }}">All Products</a>
-        </div>
-
-        <div class="navright">
-          {% if current_user.is_authenticated %}
-          <a href="{{ url_for('basket') }}">Basket</a>
-          <a href="{{ url_for('logout') }}">Logout</a>
-          {% else %}
-          <a href="{{ url_for('login') }}">Login</a>
-          <a href="{{ url_for('register') }}">Register</a>
-          {% endif %}
-        </div>
-      </nav>
+      
 
     </header>
 
@@ -56,17 +41,18 @@
     </div>
 
   </div>
-
-  <footer>
-    <p>
-    Contact Number: 01234 456789
-    <br>
-    Contact Email: ktlabsupport@gmail.com
-    <br>
-    <br>
-    Copyright &copy; KTLAB Publishing, 2020<script type="text/javascript">var year = new Date().getFullYear(); if (year > 2020) { document.write("-" + year); }</script>
-    <br>All rights reserved.</p>
-  </footer>
+  <nav>
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('products') }}">Settings</a>
+          {% if current_user.is_authenticated %}
+          <a href="{{ url_for('basket') }}">Account</a>
+          <a href="{{ url_for('logout') }}">Logout</a>
+          <a href="{{ url_for('logout') }}">Lists</a>
+          {% else %}
+          <a href="{{ url_for('login') }}">Login</a>
+          <a href="{{ url_for('register') }}">Register</a>
+          {% endif %}
+    </nav>
 
 </body>
 </html>
