@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>KTLAB Publishing</title>
+  <title>Neighborhood App</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Stylesheets/layout.css') }}">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 </head>
@@ -11,15 +11,17 @@
 <body>
 
   <div id="main">
+    <!--
     <header>
-
+      
       <div id="bannerbg">
         <img id="banner" align="center" src="{{ url_for('static',filename='Media/banner.png') }}">
       </div>
-
+      
       
 
     </header>
+    -->
 
     <div class="messages">
       {% with messages = get_flashed_messages(with_categories=true) %}

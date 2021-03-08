@@ -2,18 +2,18 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static',filename='Stylesheets/products.css') }}">
 
-<h2 align="center">Welcome to KTLAB Publishing!</h2>
-
-<h3 align="center">Home of the world's finest e-books available for purchase, with our own exclusives available today!</h3>
+<h2 align="center">Put search bar here!</h2>
 
 <div class="productinfo">
-      <h4>We think you will like the current Product of the Second!</h4>
+      <h4>Map API integration here</h4>
+      <!--
       <a href="{{ url_for('product', id=product_data.id) }}" class="clickitem">
         <h3 class="name">{{ product_data.name }}</h3>
         <h3 class="price">£{{ '%0.2f'| format(product_data.basePrice|float)}}</h3>
       </a>
+      -->
 
-      <form action = "" method="POST">
+      <!-- <form action = "" method="POST">
         {{addcartform.csrf_token}}
         {{addcartform.product_id(value = product_data.id)}}
         <button onclick="itemadded()">Add to Basket</button>
@@ -32,7 +32,7 @@
           <a href="{{ url_for('edit_product', id=product_data.id) }}">Edit</a>
           <a href="{{ url_for('delete_product', id=product_data.id) }}">Delete</a>
         {% endif %}
-      {% endif %}
+      {% endif %} -->
     </div>
 
 

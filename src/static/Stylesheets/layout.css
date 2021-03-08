@@ -9,14 +9,14 @@ html {
 }
 
 body {
-  background-color: #E8C1C5;
+  background-color: #f8f8f8;
   min-height: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
 }
 
-#banner {
+/* #banner {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -26,7 +26,7 @@ body {
 
 #bannerbg {
   background-color: #9055A2
-}
+} */
 
 nav {
   overflow: auto;
