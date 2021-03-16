@@ -3,17 +3,50 @@ from wtforms import StringField, PasswordField, SubmitField, TextAreaField, Deci
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
 from src.models import User
 
-def validate_email(self, email):
-    user = User.query.filter_by(email=email.data).first()
-    if user:
-        raise ValidationError('There is already a user account registered with the email address "' + email.data + '".')
+# def validate_email(self, email):
+#     user = User.query.filter_by(email=email.data).first()
+#     if user:
+#         raise ValidationError('There is already a user account registered with the email address "' + email.data + '".')
 
 class RegistrationForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired(), Length(min=3, max=20)])
-    email = StringField('Email Address', validators=[DataRequired(), Email(), validate_email])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=6, max=60)])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    username = StringField(
+        "Username",
+        validators=[
+            DataRequired("User name cannot be empty!"),
+            Length(min=3, max=20),
+        ]
+    )
+    email = StringField(
+        'Email Address',
+        validators=[
+            DataRequired("Mailboxes cannot be empty!"),
+            Email("The mailbox format is incorrect!"),
+            # validate_email
+        ]
+    )
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(
+                'There is already a user account registered with the email address "' + email.data + '".')
+
+    password = PasswordField(
+        'Password',
+        validators=[
+            DataRequired("Password cannot be empty!"),
+            Length(min=6, max=60)
+        ]
+    )
+    confirm_password = PasswordField(
+        'Confirm Password',
+        validators=[
+            DataRequired("Password cannot be empty!"),
+            EqualTo('password',message="The two passwords don't match!")
+        ]
+    )
     submit = SubmitField('Register')
+
+
 
 class LoginForm(FlaskForm):
     email = StringField("Email Address", validators=[DataRequired(), Email()])

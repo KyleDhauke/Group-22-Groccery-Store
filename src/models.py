@@ -34,42 +34,42 @@ class User(UserMixin, db.Model):
 def load_user(id):
     return User.query.get(int(id))
 
-class Product(db.Model):
-    # Unique identifier of this product.
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
-    # Whether this product is viewable and purchasable by customers or not.
-    active = db.Column(db.Boolean(), nullable=False)
-    # Name and description of this product.
-    name = db.Column(db.String(120), nullable=False)
-    desc = db.Column(db.String(1000), nullable=False)
-    # Path to a cover image for this product.
-    coverImage = db.Column(db.String(128), nullable=False)
-    # How many instances of this product are in stock.
-    totalStock = db.Column(db.Integer, nullable=False)
-    # The base price for this product, not including VAT or discounts.
-    basePrice = db.Column(db.Float, nullable=False)
+# class Product(db.Model):
+#     # Unique identifier of this product.
+#     id = db.Column(db.Integer, primary_key=True, nullable=False)
+#     # Whether this product is viewable and purchasable by customers or not.
+#     active = db.Column(db.Boolean(), nullable=False)
+#     # Name and description of this product.
+#     name = db.Column(db.String(120), nullable=False)
+#     desc = db.Column(db.String(1000), nullable=False)
+#     # Path to a cover image for this product.
+#     coverImage = db.Column(db.String(128), nullable=False)
+#     # How many instances of this product are in stock.
+#     totalStock = db.Column(db.Integer, nullable=False)
+#     # The base price for this product, not including VAT or discounts.
+#     basePrice = db.Column(db.Float, nullable=False)
+#
+#     def get_id(self):
+#         return self.id
+#
+#     def __repr__(self):
+#         return f"Product('{self.name}', '{self.desc}')"
 
-    def get_id(self):
-        return self.id
-
-    def __repr__(self):
-        return f"Product('{self.name}', '{self.desc}')"
-
-class Order(db.Model):
-    orderid = db.Column(db.Integer, primary_key=True, nullable=False)
-    userid = db.Column(db.Integer, nullable=False)
-    transactionid = db.Column(db.Integer, nullable=False)
-    productid = db.Column(db.Integer, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    
-    def to_dict(self):
-        return {
-            'orderid'           : self.orderid,
-            'userid'            : self.userid,
-            'transactionid'     : str(self.transactionid),
-            'productid'         : str(self.productid),
-            'quantity'          : str(self.quantity)
-        }
-
-    def __repr__(self):
-        return f"Order('{self.orderid}', '{self.id}')"
+# class Order(db.Model):
+#     orderid = db.Column(db.Integer, primary_key=True, nullable=False)
+#     userid = db.Column(db.Integer, nullable=False)
+#     transactionid = db.Column(db.Integer, nullable=False)
+#     productid = db.Column(db.Integer, nullable=False)
+#     quantity = db.Column(db.Integer, nullable=False)
+#
+#     def to_dict(self):
+#         return {
+#             'orderid'           : self.orderid,
+#             'userid'            : self.userid,
+#             'transactionid'     : str(self.transactionid),
+#             'productid'         : str(self.productid),
+#             'quantity'          : str(self.quantity)
+#         }
+#
+#     def __repr__(self):
+#         return f"Order('{self.orderid}', '{self.id}')"
