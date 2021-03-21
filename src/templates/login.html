@@ -14,22 +14,24 @@
 			<li><h2>Sign in</h2></li>
 			<br>
 			<br>
-			<li>
-              {{ form.email.label }}</li>
-							<li>
-              {{ form.email }}
-            </li>
-			<li>
-              {{ form.password.label }}</li><li>
-              {{ form.password }}
-            </li>
+			<li>{{ form.email.label }}</li>
+			<li>{{ form.email }}</li>
+			<div class="placeholder">
+				{% for err in form.email.errors %}
+				  <div class="form-control">
+					  {{ err }}
+				  </div>
+				{% endfor %}
+			</div>
+			<li>{{ form.password.label }}</li>
+			<li>{{ form.password }}</li>
 			<br>
 			<br>
 			<li><a href="{{ url_for('home') }}"><input type="submit" value="Login"></a></li>
 			<br>
 			<li><a href="{{ url_for('register') }}"><h3>CREATE ACCOUNT</h3></a></li> 
 		</ul>
-
+</form>
 
 </body>
 {% endblock content %}
