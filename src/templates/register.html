@@ -40,7 +40,7 @@
 
   <form class="form-container" method="POST" action="">
     {{ form.csrf_token }}
-    <div class="user-img"></div>
+<!--    <div class="user-img"></div>-->
     <br>
     <ul class="list">
       <li>
@@ -51,46 +51,47 @@
         {{ form.email.label }}</li><li>
         {{ form.email }}
       </li>
-      {% for err in form.email.errors %}
+      <div class="placeholder">
+        {% for err in form.email.errors %}
           <div class="form-control">
-            <ul class="errors">
-              <li>{{ err }}</li>
-            </ul>
+              {{ err }}
           </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
       <li>
         {{ form.username.label }}</li><li>
         {{ form.username }}
       </li>
-      {% for err in form.username.errors %}
+      <div class="placeholder">
+        {% for err in form.username.errors %}
           <div class="form-control">
-            <ul class="errors">
-              <li>{{ err }}</li>
-            </ul>
+              {{ err }}
           </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
       <li>
         {{ form.password.label }}</li><li>
         {{ form.password }}
       </li>
-      {% for err in form.password.errors %}
-          <div class="form-control">
-            <ul class="errors">
-              <li>{{ err }}</li>
-            </ul>
-          </div>
-      {% endfor %}
+      <div class="placeholder">
+        {% for err in form.password.errors %}
+            <div class="form-control">
+               {{ err }}
+            </div>
+        {% endfor %}
+      </div>
       <li>
         {{ form.confirm_password.label }}</li><li>
         {{ form.confirm_password }}
       </li>
-      {% for err in form.confirm_password.errors %}
-          <div class="form-control">
-            <ul class="errors">
-              <li>{{ err }}</li>
-            </ul>
-          </div>
-      {% endfor %}
+      <div class="placeholder">
+        {% for err in form.confirm_password.errors %}
+            <div class="form-control">
+              {{ err }}
+            </div>
+        {% endfor %}
+      </div>
+
       <br>
       <li>
         <a href="{{ url_for('login') }}"><input type="submit" value="Register"></a>

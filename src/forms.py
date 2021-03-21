@@ -49,8 +49,19 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField("Email Address", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired()])
+    email = StringField(
+        "Email Address",
+        validators=[
+            DataRequired(),
+            Email("The mailbox format is incorrect!")
+        ]
+    )
+    password = PasswordField(
+        "Password",
+        validators=[
+            DataRequired()
+        ]
+    )
     submit = SubmitField("Login")
 
 class CheckoutForm(FlaskForm):
