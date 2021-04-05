@@ -13,3 +13,32 @@ set FLASK_DEBUG=True
 
 Now everything is setup. Whenever you want to run the flask server, do this (make sure you're in (venv) mode):
 flask run
+
+
+<!--
+      <a href="{{ url_for('product', id=product_data.id) }}" class="clickitem">
+        <h3 class="name">{{ product_data.name }}</h3>
+        <h3 class="price">£{{ '%0.2f'| format(product_data.basePrice|float)}}</h3>
+      </a>
+      -->
+
+      <!-- <form action = "" method="POST">
+        {{addcartform.csrf_token}}
+        {{addcartform.product_id(value = product_data.id)}}
+        <button onclick="itemadded()">Add to Basket</button>
+        <label for="">Quantity:</label>
+        <input type="number" name="quantity" value="1" min="1"/>
+      </form>
+
+      {% if (current_user.is_authenticated) %}
+
+        {% if (current_user.admin) %}
+          {% if product_data.active %}
+            <p class="active_product"><em>Published</em></p>
+          {% else %}
+            <p class="inactive_product"><em>Unpublished</em></p>
+          {% endif %}
+          <a href="{{ url_for('edit_product', id=product_data.id) }}">Edit</a>
+          <a href="{{ url_for('delete_product', id=product_data.id) }}">Delete</a>
+        {% endif %}
+      {% endif %} -->

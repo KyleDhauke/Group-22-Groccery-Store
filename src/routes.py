@@ -4,8 +4,8 @@ from flask_login import login_user, logout_user, current_user
 from src.models import User, Product, Order, load_user
 from src.forms import RegistrationForm, ReviewForm, LoginForm, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
 from werkzeug.utils import secure_filename
-# from flask_googlemaps import GoogleMaps
-# from flask_googlemaps import Map
+from flask_googlemaps import GoogleMaps
+from flask_googlemaps import Map
 import os
 import time
 from random import seed, randint, choice
@@ -26,45 +26,45 @@ def addtocart(form):
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def home():
-    form = AddCartForm()
-    if form.validate_on_submit():
-        addtocart(form)
+    # form = AddCartForm()
+    # if form.validate_on_submit():
+    #     addtocart(form)
 
-    seed(int(round(time.time() * 1000)))
-    possible_choices = []
-    product_data = Product.query.filter_by(active=True)
-    for product in product_data:
-        possible_choices.append(product.id)
-    chosen = choice(possible_choices)
-    product = Product.query.get_or_404(chosen)
-    return render_template('home.html', title='Home', product_data=product, addcartform=form)
+    # seed(int(round(time.time() * 1000)))
+    # possible_choices = []
+    # product_data = Product.query.filter_by(active=True)
+    # for product in product_data:
+    #     possible_choices.append(product.id)
+    # chosen = choice(possible_choices)
+    # product = Product.query.get_or_404(chosen)
+    # return render_template('home.html', title='Home', product_data=product, addcartform=form)
 
-    # mymap = Map(
-    #     identifier="view-side",
-    #     lat=37.4419,
-    #     lng=-122.1419,
-    #     markers=[(37.4419, -122.1419)]
-    # )
-    # sndmap = Map(
-    #     identifier="sndmap",
-    #     lat=37.4419,
-    #     lng=-122.1419,
-    #     markers=[
-    #       {
-    #          'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-    #          'lat': 37.4419,
-    #          'lng': -122.1419,
-    #          'infobox': "<b>Hello World</b>"
-    #       },
-    #       {
-    #          'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-    #          'lat': 37.4300,
-    #          'lng': -122.1400,
-    #          'infobox': "<b>Hello World from other place</b>"
-    #       }
-    #     ]
-    # )
-    # return render_template('home.html', mymap=mymap, sndmap=sndmap)
+    mymap = Map(
+        identifier="view-side",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[(37.4419, -122.1419)]
+    )
+    sndmap = Map(
+        identifier="sndmap",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[
+          {
+             'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+             'lat': 37.4419,
+             'lng': -122.1419,
+             'infobox': "<b>Hello World</b>"
+          },
+          {
+             'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+             'lat': 37.4300,
+             'lng': -122.1400,
+             'infobox': "<b>Hello World from other place</b>"
+          }
+        ] 
+    )
+    return render_template('home.html',mymap=mymap, sndmap=sndmap)
 
 @app.route("/about")
 def about():
