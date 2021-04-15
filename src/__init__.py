@@ -4,7 +4,8 @@ from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
 import os
 
-APP_PATH = os.path.dirname(os.path.abspath(__file__))
+#Not Used Currently.
+#APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
 
@@ -22,8 +23,8 @@ csrf = CSRFProtect(app)
 csrf.init_app(app)
 
 # Configure database access
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://c1914891:Ihatemysql1@csmysql.cs.cf.ac.uk:3306/c1914891_onlineShop'
-app.register_error_handler(404, page_not_found)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://c1914891:Ihatemysql1@csmysql.cs.cf.ac.uk:3306/c1914891_onlineShop'
+#app.register_error_handler(404, page_not_found)
 
 login_manager = LoginManager()
 login_manager.init_app(app)

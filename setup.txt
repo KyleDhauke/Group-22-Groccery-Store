@@ -1,8 +1,7 @@
 Setup guide:
 
 If you haven't already, first clone the repo with the command:
-git clone https://gitlab.cs.cf.ac.uk/c1825285/onlineshop.git
-cd onlineshop
+git clone https://git.cardiff.ac.uk/c1932063/group-22-year-2.git
 
 Now do these:
 python -m venv venv

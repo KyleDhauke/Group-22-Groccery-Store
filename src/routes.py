@@ -1,9 +1,9 @@
-from src import app, db, APP_PATH
+from src import app, db
 from flask import render_template, url_for, abort, request, redirect, flash, session, jsonify
 from flask_login import login_user, logout_user, current_user
 # from src.models import User, Product, Order, load_user
 from src.models import User
-from src.forms import RegistrationForm, ReviewForm, LoginForm, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
+from src.forms import RegistrationForm, LoginForm
 from werkzeug.utils import secure_filename
 import os
 import time
@@ -24,9 +24,9 @@ def addtocart(form):
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def home():
-    form = AddCartForm()
-    if form.validate_on_submit():
-        addtocart(form)
+    # form = AddCartForm()
+    # if form.validate_on_submit():
+    #     addtocart(form)
 
     seed(int(round(time.time() * 1000)))
     # possible_choices = []
@@ -36,7 +36,7 @@ def home():
     # chosen = choice(possible_choices)
     # product = Product.query.get_or_404(chosen)
     # return render_template('home.html', title='Home', product_data=product, addcartform=form)
-    return render_template('home.html', form=form)
+    return render_template('home.html')
 
 # @app.route("/about")
 # def about():
