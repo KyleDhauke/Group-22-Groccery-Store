@@ -1,9 +1,19 @@
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px
+}
+
+#search_bar{
+    height:5%;
+}
+
 #googleMap{
-    width:70%;
-    height: auto;
+    width:100%;
+    height: 88%;
     position: absolute;
-    bottom:0;
+    bottom:8%;
     left:0;
     right:0;
-    top:60px;
+    top:5%;
 }
