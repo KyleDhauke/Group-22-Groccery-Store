@@ -41,8 +41,8 @@ def home():
 
     mymap = Map(
         identifier="view-side",
-        lat=37.4419,
-        lng=-122.1419,
+        lat=41.9023600,
+        lng=12.4533200,
         markers=[(37.4419, -122.1419)]
     )
     sndmap = Map(

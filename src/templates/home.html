@@ -1,14 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static',filename='Stylesheets/products.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='Stylesheets/home.css') }}">
 
 <h2 align="center">Put search bar here!</h2>
-
-<div class="productinfo">
-      <h4>Map API integration here</h4>
-      {{googlemap("simple-map", lat=0.23234234, lng=-0.234234234)}}
+<div class = "map">
+  {{googlemap("simple-map", lat=41.9023600, lng=12.4533200, style = url_for('static',filename='Stylesheets/home.css'))}} -->
+  <!-- {{mymap.html}} -->
+</div>
       
-    </div>
-
 
 {% endblock content %}
