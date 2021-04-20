@@ -4,9 +4,25 @@
 
 <h2 align="center">Put search bar here!</h2>
 <div class = "map">
-  {{googlemap("simple-map", lat=41.9023600, lng=12.4533200, style = url_for('static',filename='Stylesheets/home.css'))}} -->
-  <!-- {{mymap.html}} -->
+  {{googlemap("simple-map", 
+  lat=51.4800000, lng=-3.1800000, 
+  style = url_for('static',filename='Stylesheets/home.css'),
+  markers=[
+  {
+     'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+     'lat': 51.4846,
+     'lng': -3.1892,
+     'infobox': "<b>Nice Place to Read a Book</b>"
+  },
+  {
+     'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+     'lat': 51.4876,
+     'lng': -3.1992,
+     'infobox': "<b>Good Chippy</b>"
+  }
+  ]
+  )
+  }}
 </div>
-      
-
+    
 {% endblock content %}
