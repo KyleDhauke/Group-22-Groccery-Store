@@ -34,6 +34,38 @@ class User(UserMixin, db.Model):
 def load_user(id):
     return User.query.get(int(id))
 
+
+class Landmark(db.Model):
+     # Unique identifier of this landmark.
+     landmarkid = db.Column(db.Integer, primary_key=True, nullable=False)
+     # Name of the landmark.
+     name = db.Column(db.String(120), nullable=False)
+     # Cover image for this landmark.
+     coverImage = db.Column(db.String(128), nullable=False)
+
+     def get_id(self):
+         return self.landmarkid
+
+     def __repr__(self):
+         return f"Landmark('{self.name}', '{self.coverImage}')"
+
+class Notes(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    userid = db.Column(db.Integer, nullable=False)
+    reviewTitle = db.Column(db.String(120), nullable=False)
+    review = db.Column(db.String(1024), nullable=False)
+    landmarkid = db.Column(db.Integer,  nullable=False)
+    def to_dict(self):
+         return {
+             'noteid'           : self.orderid,
+             'userid'           : self.userid,
+             'review'           : str(self.review),
+         }
+
+    def __repr__(self):
+         return f"Note('{self.noteid}', '{self.userid}')"
+
+
 # class Product(db.Model):
 #     # Unique identifier of this product.
 #     id = db.Column(db.Integer, primary_key=True, nullable=False)
