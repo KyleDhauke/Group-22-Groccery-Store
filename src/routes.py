@@ -1,32 +1,32 @@
 from src import app, db, APP_PATH
 from flask import render_template, url_for, abort, request, redirect, flash, session, jsonify
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 # from src.models import User, Product, Order, load_user
 from src.models import User
-from src.forms import RegistrationForm, ReviewForm, LoginForm, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
+from src.forms import RegistrationForm, ReviewForm, LoginForm #, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
 from werkzeug.utils import secure_filename
 import os
 import time
 from random import seed, randint, choice
 
-def addtocart(form):
-    product_id = form.product_id.data
-    quantity = int(form.quantity.data)
-    if "Shoppingcart" not in session:
-        session["Shoppingcart"] = dict()
-    if product_id in session ["Shoppingcart"]:
-        session["Shoppingcart"][product_id] = str(int(session["Shoppingcart"][product_id]) + quantity)
-    else:
-        session["Shoppingcart"][product_id] = str(quantity)
-    session.modified = True
-    flash("Added product to basket.", category='good')
+#def addtocart(form):
+#    product_id = form.product_id.data
+#    quantity = int(form.quantity.data)
+#    if "Shoppingcart" not in session:
+#        session["Shoppingcart"] = dict()
+#    if product_id in session ["Shoppingcart"]:
+#        session["Shoppingcart"][product_id] = str(int(session["Shoppingcart"][product_id]) + quantity)
+#    else:
+#        session["Shoppingcart"][product_id] = str(quantity)
+#    session.modified = True
+#    flash("Added product to basket.", category='good')
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def home():
-    form = AddCartForm()
-    if form.validate_on_submit():
-        addtocart(form)
+    #form = AddCartForm()
+    #if form.validate_on_submit():
+    #    addtocart(form)
 
     seed(int(round(time.time() * 1000)))
     # possible_choices = []
@@ -36,7 +36,8 @@ def home():
     # chosen = choice(possible_choices)
     # product = Product.query.get_or_404(chosen)
     # return render_template('home.html', title='Home', product_data=product, addcartform=form)
-    return render_template('home.html', form=form)
+    return render_template('home.html')
+    #, form=form)
 
 # @app.route("/about")
 # def about():
@@ -75,12 +76,15 @@ def register():
 
 @app.route("/accountDetails")
 def accountDetails():
-    return render_template('accountDetails.html', title='accountDetials')
+    return render_template('accountDetails.html', title='accountDetails')
 
 @app.route("/confirm")
 def confirm():
     return render_template('confirm.html', title='Confirm')
 
+@app.route("/lists")
+def lists():
+    return render_template('lists.html', title='Lists')
 
 # @app.route("/basket")
 # def basket():
