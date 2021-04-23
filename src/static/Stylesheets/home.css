@@ -7,3 +7,12 @@
     right:0;
     top:60px;
 }
+
+/* Style the search box inside the navigation bar */
+.topnav input[type=text] {
+  padding: 10px;
+  width: 30%;
+  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 25px;
+}
