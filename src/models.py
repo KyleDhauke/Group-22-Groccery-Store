@@ -1,7 +1,10 @@
 from datetime import datetime
-from src import login_manager
+from src import login_manager,app,db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask import current_app
+
 from src import db
 
 class User(UserMixin, db.Model):
@@ -10,14 +13,31 @@ class User(UserMixin, db.Model):
     email = db.Column(db.Text, nullable=False)
     passwordHash = db.Column(db.String(128))
     password = db.Column(db.String(60), nullable=False)
-    admin = db.Column(db.Boolean, nullable=False)
-    transactionid = db.Column(db.Integer, nullable = False, default=0)
+    # admin = db.Column(db.Boolean, nullable=False)
+    # transactionid = db.Column(db.Integer, nullable = False, default=0)
+    confirmed = db.Column(db.Boolean, default=False)
 
     def get_id(self):
         return self.id
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
+
+    def generate_confirmation_token(self, expiration=3600):
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'confirm': self.id}).decode('utf-8')
+
+    def confirm(self, token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token.encode('utf-8'))
+        except:
+            return False
+        if data.get('confirm') != self.id:
+            return False
+        self.confirmed = True
+        db.session.add(self)
+        return True
 
     @property
     def password(self):

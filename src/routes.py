@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import os
 import time
 from random import seed, randint, choice
+from src.email import send_email
 
 #def addtocart(form):
 #    product_id = form.product_id.data
@@ -67,20 +68,36 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
-    if (form.validate_on_submit()):
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data, admin=False)
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
+        token = user.generate_confirmation_token()
+        send_email(user.email, 'Confirm Your Account',
+                   'auth/confirm',user=user,token=token)
+        flash('A confirmation email has been sent to you by email.')
         return redirect(url_for("home"))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/confirm/<token>')
+@login_required
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for('home'))
+    if current_user.confirm(token):
+        db.session.commit()
+        flash('You have confirmed your account. Thanks!')
+    else:
+        flash('The confirmation link is invalid or has expired.')
+    return redirect(url_for('home'))
 
 @app.route("/accountDetails")
 def accountDetails():
     return render_template('accountDetails.html', title='accountDetails')
 
-@app.route("/confirm")
-def confirm():
-    return render_template('confirm.html', title='Confirm')
+# @app.route("/confirm")
+# def confirm():
+#     return render_template('confirm.html', title='Confirm')
 
 @app.route("/lists")
 def lists():

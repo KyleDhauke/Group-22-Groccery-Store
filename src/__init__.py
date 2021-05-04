@@ -2,7 +2,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
+from flask_mail import Mail,Message
 import os
+
 
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -25,12 +27,31 @@ csrf.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://c1914891:Ihatemysql1@csmysql.cs.cf.ac.uk:3306/c1914891_onlineShop'
 app.register_error_handler(404, page_not_found)
 
+
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 db = SQLAlchemy(app)
 
+#mail settings
+app.config['MAIL_SERVER'] = 'smtp.163.com'
+app.config['MAIL_PORT'] = 25
+app.config['MAIL_USE_TLS'] = True
+# 注意这里启用的是TLS协议(transport layer security)，而不是SSL443协议所以用的是25号端口
+app.config['MAIL_USERNAME'] = 'wyyrx0530@163.com'
+app.config['MAIL_PASSWORD'] = 'LOGYRXSQBWUARANA'
+
+app.config['FLASKY_MAIL_SUBJECT_PREFIX'] = '[confirm]'
+app.config['FLASKY_MAIL_SENDER'] = 'wyyrx0530@163.com'
+
+mail = Mail(app)
+
+
 # Setup product image upload folder
 app.config['UPLOAD_FOLDER'] = "static/Media/ProductImages"
 
 from src import routes
+
+
+

@@ -10,15 +10,15 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwzMDJMQxVJi5uyB9h5qAaS6QrExe7OhQ&sensor=FALSE&callback=initMap"></script>
 
     <script>
-    function initialize()
-    {
-        var mapProp = {
-            center:new google.maps.LatLng(51.475, -3.17),
-            zoom:13,
-            mapTypeId:google.maps.MapTypeId.ROADMAP
-        };
-        var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-    }
+        function initialize()
+        {
+            var mapProp = {
+                center:new google.maps.LatLng(51.475, -3.17),
+                zoom:13,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+            var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        }
 
 
         google.maps.event.addDomListener(window, 'load', initialize);
