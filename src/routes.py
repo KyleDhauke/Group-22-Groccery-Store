@@ -46,14 +46,17 @@ def home():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('home'))
     form = LoginForm()
     if (form.validate_on_submit()):
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(password=form.password.data):
             login_user(user)
-            return redirect(url_for('home'))
+            if user.confirmed == 1:
+                return redirect(url_for('home'))
+            else:
+                flash("Please confirm your email address")
         else:
             flash("Login unsuccessful! Invalid username or password.", category='bad')
     return render_template('login.html', title='Sign In', form=form)
@@ -72,11 +75,12 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
+        login_user(user)
         token = user.generate_confirmation_token()
         send_email(user.email, 'Confirm Your Account',
                    'auth/confirm',user=user,token=token)
         flash('A confirmation email has been sent to you by email.')
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/confirm/<token>')

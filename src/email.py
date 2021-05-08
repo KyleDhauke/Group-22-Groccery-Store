@@ -8,5 +8,5 @@ def send_email(to, subject, template, user, **kwargs):
     msg = Message(app.config['FLASKY_MAIL_SUBJECT_PREFIX'] + ' ' + subject,
                   sender=app.config['FLASKY_MAIL_SENDER'], recipients=[to])
     msg.html = render_template(template + '.html', **kwargs,user=user)
-    msg.body = render_template(template + '.txt', **kwargs,user=user)
+    # msg.body = render_template(template + '.txt', **kwargs,user=user)
     mail.send(msg)
