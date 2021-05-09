@@ -11,8 +11,11 @@
 /* Style the search box inside the navigation bar */
 .topnav input[type=text] {
   padding: 10px;
-  width: 30%;
+  width: 95%;
   margin-top: 10px;
   margin-left: 20px;
   font-size: 25px;
+  position: center;
+  border-radius: 10px;
+  border-color: black;
 }

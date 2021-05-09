@@ -24,7 +24,7 @@ csrf = CSRFProtect(app)
 csrf.init_app(app)
 
 # Configure database access
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://c1914891:Ihatemysql1@csmysql.cs.cf.ac.uk:3306/c1914891_onlineShop'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://c1932063:Team22project@csmysql.cs.cf.ac.uk:3306/c1932063_Team22Year2'
 app.register_error_handler(404, page_not_found)
 
 
