@@ -56,7 +56,7 @@ def login():
             if user.confirmed == 1:
                 return redirect(url_for('home'))
             else:
-                flash("Please confirm your email address")
+                flash("Please confirm your email address", category='bad')
         else:
             flash("Login unsuccessful! Invalid username or password.", category='bad')
     return render_template('login.html', title='Sign In', form=form)
