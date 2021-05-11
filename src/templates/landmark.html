@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+  <head>
+    <meta charset="utf-8">
+    <title>Your Landmarks</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Stylesheets/lists.css') }}">
+  </head>
+  <body>
+    <br><br>
+    <section class="container content-section">
+        {% if landmarks_data|length == 0 %}
+        <div style="text-align: center;">
+        <h2 class="section-header" style="text-align: center;">You don't have any markers</h2>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <a href="{{url_for('lists')}}">Back to Lists</a>
+        </div>
+        {% else %}
+        <h2 class="section-header">Your Landmarks</h2>
+        <br>
+        <table>
+          <thead>
+            <th class="List-name List-header">Landmark ID</th>
+            <th class="Landmark-name Landmark-header">Landmark Name</th>
+            <th class="Landmark-note Note-header">CoverImage</th>
+          </thead>
+          <tbody>
+            {% for i in range(landmarks_data|length) %}
+            <tr>
+                <td>{{landmarks_data[i].landmarkid}}</td>
+                <td>{{landmarks_data[i].name}}</td>
+                <td>{{landmarks_data[i].coverImage}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="{{ url_for('lists') }}">Back to List</a>
+        {% endif %}
+
+    </section>
+  </body>
+  {% endblock content %}

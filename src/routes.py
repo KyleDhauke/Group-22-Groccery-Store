@@ -2,8 +2,8 @@ from src import app, db, APP_PATH
 from flask import render_template, url_for, abort, request, redirect, flash, session, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 # from src.models import User, Product, Order, load_user
-from src.models import User
-from src.forms import RegistrationForm, ReviewForm, LoginForm #, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
+from src.models import User,List,lists_landmarks,Landmark
+from src.forms import RegistrationForm, ReviewForm, LoginForm, CreatelistForm #, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
 from werkzeug.utils import secure_filename
 import os
 import time
@@ -105,7 +105,29 @@ def accountDetails():
 
 @app.route("/lists")
 def lists():
-    return render_template('lists.html', title='Lists')
+    lists = List.query.all()
+    return render_template('lists.html', title='Lists',lists = lists)
+
+@app.route("/creatlists", methods=['GET', 'POST'])
+def createlists():
+    form = CreatelistForm()
+    if (form.validate_on_submit()):
+        list = List(name=form.listname.data)
+        db.session.add(list)
+        db.session.commit()
+        return redirect(url_for("lists"))
+    return render_template('createlists.html', title='Createlists',form = form)
+
+
+@app.route("/landmarks/<listid>")
+def landmarks(listid):
+    #All the landmarks in a list of list_landmarks table
+    landmarks_data_id = lists_landmarks.query.filter(lists_landmarks.listid == listid).all()
+    #All the landmarks from that list
+    landmarks_data = []
+    for i in range(len(landmarks_data_id)):
+        landmarks_data.extend(Landmark.query.filter(Landmark.landmarkid == landmarks_data_id[i].landmarkid).all())
+    return render_template('landmark.html',landmarks_data = landmarks_data)
 
 # @app.route("/basket")
 # def basket():

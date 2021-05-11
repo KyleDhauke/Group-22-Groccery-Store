@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+    <head>
+        <title>Createlists</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Stylesheets/login.css') }}">
+    </head>
+    <body>
+        <form class="form-container" method="POST" action="">
+            {{ form.csrf_token }}
+            <div class="user-img"></div>
+                <ul class="list">
+                    <br><br><br>
+                    <li><h2>Creat Lists</h2></li>
+                    <br>
+                    <br>
+                    <li>{{ form.listname.label }}</li>
+                    <li>{{ form.listname }}</li>
+                    <div class="placeholder">
+                        {% for err in form.listname.errors %}
+                          <div class="form-control">
+                              {{ err }}
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <br>
+                    <li><a href="{{ url_for('lists') }}"><input type="submit" value="CreatList"></a></li>
+                </ul>
+        </form>
+    </body>
+    </html>
+ {% endblock content %}

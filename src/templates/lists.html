@@ -3,13 +3,13 @@
 {% block content %}
   <head>
     <meta charset="utf-8">
-    <title>Your Landmarks</title>
+    <title>Your Lists</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Stylesheets/lists.css') }}">
   </head>
   <body>
     <br><br>
     <section class="container content-section">
-        {% if Landmark|length == 0 %}
+        {% if lists|length == 0 %}
         <div style="text-align: center;">
         <h2 class="section-header" style="text-align: center;">You don't have any lists</h2>
         <br />
@@ -28,21 +28,20 @@
         <br>
         <table>
           <thead>
-            <th class="List-name List-header">Landmark</th>
-            <th class="Landmark-name Landmark-header">Landmark</th>
-            <th class="Landmark-note Note-header">Note</th>
+            <th class="List-name List-header">List ID</th>
+            <th class="Landmark-name Landmark-header">List Name</th>
           </thead>
           <tbody>
-            {% for i in range(Landmark|length) %}
+            {% for i in range(lists|length) %}
             <tr>
-              <td>{{Landmark[i].name}}</td>
-              <td>{{Note[i]}}</td>
-              <td><a href= "{{url_for('removenote', id=Landmark[i].id)}}">Remove</a></td>
+                <td>{{lists[i].listid}}</td>
+                <td><a href="{{ url_for('landmarks', listid = lists[i].listid) }}">{{lists[i].name}}</a></td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
         {% endif %}
+        <a href="{{ url_for('createlists') }}">Create Lists</a>
     </section>
   </body>
   {% endblock content %}

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, DecimalField, FileField, DateTimeField, HiddenField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
-from src.models import User
+from src.models import User,List
 
 # def validate_email(self, email):
 #     user = User.query.filter_by(email=email.data).first()
@@ -16,19 +16,22 @@ class RegistrationForm(FlaskForm):
             Length(min=3, max=20),
         ]
     )
-    email = StringField(
-        'Email Address',
-        validators=[
-            DataRequired("Mailboxes cannot be empty!"),
-            Email("The mailbox format is incorrect!"),
-            # validate_email
-        ]
-    )
+
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError(
                 'There is already a user account registered with the email address "' + email.data + '".')
+
+    email = StringField(
+        'Email Address',
+        validators=[
+            DataRequired("Mailboxes cannot be empty!"),
+            Email("The mailbox format is incorrect!"),
+            #validate_email
+        ]
+    )
+
 
     password = PasswordField(
         'Password',
@@ -63,6 +66,24 @@ class LoginForm(FlaskForm):
         ]
     )
     submit = SubmitField("Login")
+
+class CreatelistForm(FlaskForm):
+
+    def validate_listname(self, listname):
+        list = List.query.filter_by(name=listname.data).first()
+        if list:
+            raise ValidationError(
+                'There is already a list named "' + listname.data + '".')
+
+    listname = StringField(
+        "List Name",
+        validators=[
+            DataRequired(),
+            #validate_listname
+        ]
+    )
+
+    submit = SubmitField("CreateList")
 
 #class CheckoutForm(FlaskForm):
 #

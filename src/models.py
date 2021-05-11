@@ -69,6 +69,21 @@ class Landmark(db.Model):
      def __repr__(self):
          return f"Landmark('{self.name}', '{self.coverImage}')"
 
+class List(db.Model):
+    # Unique identifier of this list.
+    listid = db.Column('listid',db.Integer, primary_key=True)
+    # Name of the list.
+    name = db.Column(db.String(120), nullable=False)
+
+# lists_landmarks = db.Table('lists_landmarks',
+#                            db.Column('listid',db.Integer,db.ForeignKey('lists.listid'),primary_key=True),
+#                            db.Column('landmarkid',db.Integer, db.ForeignKey('landmarks.landmarkid'),primary_key=True)
+#                            )
+
+class lists_landmarks(db.Model):
+    listid = db.Column('listid',db.Integer,db.ForeignKey('lists.listid'),primary_key=True)
+    landmarkid = db.Column('landmarkid',db.Integer, db.ForeignKey('landmarks.landmarkid'),primary_key=True)
+
 class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     userid = db.Column(db.Integer, nullable=False)
