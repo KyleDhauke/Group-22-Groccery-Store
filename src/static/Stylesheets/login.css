@@ -1,15 +1,22 @@
+.content {
+
+    background-color: #A9C8F0;
+
+
+}
 
 .form-container {
     width:600px;
-    height:600px;
-    padding: :40px 30px;
+    height:700px;
+    padding: :10px 30px;
     background-color: #fff;
-    border-radius: :700px;
+    border-radius: :25px;
     box-shadow: : 0 0 10px 0 #000;
     margin-left: auto;
     margin-right: auto;
     margin-top:auto;
     position: relative;
+    border: #A9C8F0;
 }
 
 .user-img {
@@ -27,6 +34,7 @@
     left: 140px;
 }
 
+
 ul.list {
     list-style-type: none;
     text-align: center;
@@ -43,6 +51,7 @@ ul.list li input{
     border: none;
     background-color: #d3d3d3;
     border-radius: 5px;
+    font: 15px Arial;
 }
 
 ul.list li input[type="submit"]{
@@ -54,15 +63,25 @@ ul.list li input[type="submit"]{
     font-size: 24px;
     padding-top: 10px;
     padding-bottom: 10px;
+    font: 15px Arial;
+}
+
+title {
+
+    color: #257DEC;
+    font-style: bold;
+    font: 15px Arial;
+
 }
 
 h3 {
     color: #525753;
     font-style: bold;
+    font: 15px Arial;
 }
 
 footer {
-    background-color: #011638;
+    background-color: #A9C8F0;;
 }
 
 div.form-control{
@@ -72,8 +91,3 @@ div.form-control{
 div.placeholder{
     height:20px;
 }
-
-
-
-
-

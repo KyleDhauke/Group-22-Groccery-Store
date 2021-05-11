@@ -1,0 +1,47 @@
+<!just the basket thing duplicated ready to be a landmark lists page?>
+{% extends "layout.html" %}
+{% block content %}
+  <head>
+    <meta charset="utf-8">
+    <title>Your Lists</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Stylesheets/lists.css') }}">
+  </head>
+  <body>
+    <br><br>
+    <section class="container content-section">
+        {% if lists|length == 0 %}
+        <div style="text-align: center;">
+        <h2 class="section-header" style="text-align: center;">You don't have any lists</h2>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <a href="{{url_for('home')}}">Back to Map</a>
+        </div>
+        {% else %}
+        <h2 class="section-header">Your Lists</h2>
+        <br>
+        <table>
+          <thead>
+            <th class="List-name List-header">List ID</th>
+            <th class="Landmark-name Landmark-header">List Name</th>
+          </thead>
+          <tbody>
+            {% for i in range(lists|length) %}
+            <tr>
+                <td>{{lists[i].listid}}</td>
+                <td><a href="{{ url_for('landmarks', listid = lists[i].listid) }}">{{lists[i].name}}</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+        <a href="{{ url_for('createlists') }}">Create Lists</a>
+    </section>
+  </body>
+  {% endblock content %}

@@ -1,32 +1,44 @@
 from src import app, db
 from flask import render_template, url_for, abort, request, redirect, flash, session, jsonify
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 # from src.models import User, Product, Order, load_user
+<<<<<<< HEAD
 from src.models import User
 from src.forms import RegistrationForm, LoginForm
+=======
+from src.models import User,List,lists_landmarks,Landmark
+from src.forms import RegistrationForm, ReviewForm, LoginForm, CreatelistForm #, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
+>>>>>>> 27f80a3219ad8db5a640569273dea902084261b9
 from werkzeug.utils import secure_filename
 import os
 import time
 from random import seed, randint, choice
+from src.email import send_email
 
-def addtocart(form):
-    product_id = form.product_id.data
-    quantity = int(form.quantity.data)
-    if "Shoppingcart" not in session:
-        session["Shoppingcart"] = dict()
-    if product_id in session ["Shoppingcart"]:
-        session["Shoppingcart"][product_id] = str(int(session["Shoppingcart"][product_id]) + quantity)
-    else:
-        session["Shoppingcart"][product_id] = str(quantity)
-    session.modified = True
-    flash("Added product to basket.", category='good')
+#def addtocart(form):
+#    product_id = form.product_id.data
+#    quantity = int(form.quantity.data)
+#    if "Shoppingcart" not in session:
+#        session["Shoppingcart"] = dict()
+#    if product_id in session ["Shoppingcart"]:
+#        session["Shoppingcart"][product_id] = str(int(session["Shoppingcart"][product_id]) + quantity)
+#    else:
+#        session["Shoppingcart"][product_id] = str(quantity)
+#    session.modified = True
+#    flash("Added product to basket.", category='good')
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def home():
+<<<<<<< HEAD
     # form = AddCartForm()
     # if form.validate_on_submit():
     #     addtocart(form)
+=======
+    #form = AddCartForm()
+    #if form.validate_on_submit():
+    #    addtocart(form)
+>>>>>>> 27f80a3219ad8db5a640569273dea902084261b9
 
     seed(int(round(time.time() * 1000)))
     # possible_choices = []
@@ -37,6 +49,10 @@ def home():
     # product = Product.query.get_or_404(chosen)
     # return render_template('home.html', title='Home', product_data=product, addcartform=form)
     return render_template('home.html')
+<<<<<<< HEAD
+=======
+    #, form=form)
+>>>>>>> 27f80a3219ad8db5a640569273dea902084261b9
 
 # @app.route("/about")
 # def about():
@@ -44,14 +60,17 @@ def home():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('home'))
     form = LoginForm()
     if (form.validate_on_submit()):
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(password=form.password.data):
             login_user(user)
-            return redirect(url_for('home'))
+            if user.confirmed == 1:
+                return redirect(url_for('home'))
+            else:
+                flash("Please confirm your email address", category='bad')
         else:
             flash("Login unsuccessful! Invalid username or password.", category='bad')
     return render_template('login.html', title='Sign In', form=form)
@@ -66,21 +85,63 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
-    if (form.validate_on_submit()):
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data, admin=False)
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for("home"))
+        login_user(user)
+        token = user.generate_confirmation_token()
+        send_email(user.email, 'Confirm Your Account',
+                   'auth/confirm',user=user,token=token)
+        flash('A confirmation email has been sent to you by email.')
+        return redirect(url_for("login"))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/confirm/<token>')
+@login_required
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for('home'))
+    if current_user.confirm(token):
+        db.session.commit()
+        flash('You have confirmed your account. Thanks!')
+    else:
+        flash('The confirmation link is invalid or has expired.')
+    return redirect(url_for('home'))
 
 @app.route("/accountDetails")
 def accountDetails():
-    return render_template('accountDetails.html', title='accountDetials')
+    return render_template('accountDetails.html', title='accountDetails')
 
-@app.route("/confirm")
-def confirm():
-    return render_template('confirm.html', title='Confirm')
+# @app.route("/confirm")
+# def confirm():
+#     return render_template('confirm.html', title='Confirm')
 
+@app.route("/lists")
+def lists():
+    lists = List.query.all()
+    return render_template('lists.html', title='Lists',lists = lists)
+
+@app.route("/creatlists", methods=['GET', 'POST'])
+def createlists():
+    form = CreatelistForm()
+    if (form.validate_on_submit()):
+        list = List(name=form.listname.data)
+        db.session.add(list)
+        db.session.commit()
+        return redirect(url_for("lists"))
+    return render_template('createlists.html', title='Createlists',form = form)
+
+
+@app.route("/landmarks/<listid>")
+def landmarks(listid):
+    #All the landmarks in a list of list_landmarks table
+    landmarks_data_id = lists_landmarks.query.filter(lists_landmarks.listid == listid).all()
+    #All the landmarks from that list
+    landmarks_data = []
+    for i in range(len(landmarks_data_id)):
+        landmarks_data.extend(Landmark.query.filter(Landmark.landmarkid == landmarks_data_id[i].landmarkid).all())
+    return render_template('landmark.html',landmarks_data = landmarks_data)
 
 # @app.route("/basket")
 # def basket():

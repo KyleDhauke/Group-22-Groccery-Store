@@ -1,44 +1,44 @@
-{% extends "layout.html" %}
-{% block content %}
-<link rel="stylesheet" href="{{ url_for('static',filename='Stylesheets/product.css') }}">
-<!-- TODO: setup form backend -->
-<form name="save_product" class="product" method="POST" enctype="multipart/form-data" action="">
-  {{ form.csrf_token }}
-  <div class="rightmenu">
-    <p class="price">
-      Price: £
-      {{ form.price }}
-    </p>
-<!--    <h2 class="stock">
-      <label for="edit_stock">Add stock:</label>
-      <input type="text" id="edit_stock" class="edit_number" name="stock" value="0"/>
-    </h2>
-    <p>(Current: {{ product.totalStock }})</p>-->
-  </div>
-  
-  <div class="edit_image">
-    {{ form.image.label }}
-    {{ form.image }}
-  </div>
-  <img class="coverimage" src="{{ url_for('static', filename=('Media/ProductImages/'+product.coverImage)) }}" 
-        alt="Cover image of '{{ product.name }}' ({{ product.coverImage }})"/>
-  
-  <div class="info">
-    {{ form.name.label("Name: ") }}
-    {{ form.name }}
-    <br />
-    <br />
-    <div>
-    {{ form.description.label("Description: ") }}
-    {{ form.description(rows=20, cols=80) }}
-    </div>
-  </div>
-  
-  <div class="edit_actions">
-    <!-- TODO: redirect to customer view -->
-    <a href="{{ url_for('products') }}">Cancel</a>
-    {{ form.submit }}
-  </div>
-  
-</form>
-{% endblock %}
+<!--{% extends "layout.html" %}-->
+<!--{% block content %}-->
+<!--<link rel="stylesheet" href="{{ url_for('static',filename='Stylesheets/product.css') }}">-->
+<!--&lt;!&ndash; TODO: setup form backend &ndash;&gt;-->
+<!--<form name="save_product" class="product" method="POST" enctype="multipart/form-data" action="">-->
+<!--  {{ form.csrf_token }}-->
+<!--  <div class="rightmenu">-->
+<!--    <p class="price">-->
+<!--      Price: £-->
+<!--      {{ form.price }}-->
+<!--    </p>-->
+<!--&lt;!&ndash;    <h2 class="stock">-->
+<!--      <label for="edit_stock">Add stock:</label>-->
+<!--      <input type="text" id="edit_stock" class="edit_number" name="stock" value="0"/>-->
+<!--    </h2>-->
+<!--    <p>(Current: {{ product.totalStock }})</p>&ndash;&gt;-->
+<!--  </div>-->
+<!--  -->
+<!--  <div class="edit_image">-->
+<!--    {{ form.image.label }}-->
+<!--    {{ form.image }}-->
+<!--  </div>-->
+<!--  <img class="coverimage" src="{{ url_for('static', filename=('Media/ProductImages/'+product.coverImage)) }}" -->
+<!--        alt="Cover image of '{{ product.name }}' ({{ product.coverImage }})"/>-->
+<!--  -->
+<!--  <div class="info">-->
+<!--    {{ form.name.label("Name: ") }}-->
+<!--    {{ form.name }}-->
+<!--    <br />-->
+<!--    <br />-->
+<!--    <div>-->
+<!--    {{ form.description.label("Description: ") }}-->
+<!--    {{ form.description(rows=20, cols=80) }}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  -->
+<!--  <div class="edit_actions">-->
+<!--    &lt;!&ndash; TODO: redirect to customer view &ndash;&gt;-->
+<!--    <a href="{{ url_for('products') }}">Cancel</a>-->
+<!--    {{ form.submit }}-->
+<!--  </div>-->
+<!--  -->
+<!--</form>-->
+<!--{% endblock %}-->

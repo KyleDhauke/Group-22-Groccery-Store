@@ -1,13 +1,13 @@
-{% extends "layout.html" %}
-{% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='Stylesheets/delete_product.css') }}">
-<h1>Warning: Are you sure you wish to delete product '{{ product.name }}' permanently?</h1>
-<br />
-<h3>Deleting a product entry is irreversible.</h3>
-<br />
-<form name="delete_product" class="delete_product", method='POST'>
-  {{ form.csrf_token }}
-  {{ form.cancel }}
-  {{ form.submit }}
-</form>
-{% endblock %}
+<!--{% extends "layout.html" %}-->
+<!--{% block content %}-->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='Stylesheets/delete_product.css') }}">-->
+<!--<h1>Warning: Are you sure you wish to delete product '{{ product.name }}' permanently?</h1>-->
+<!--<br />-->
+<!--<h3>Deleting a product entry is irreversible.</h3>-->
+<!--<br />-->
+<!--<form name="delete_product" class="delete_product", method='POST'>-->
+<!--  {{ form.csrf_token }}-->
+<!--  {{ form.cancel }}-->
+<!--  {{ form.submit }}-->
+<!--</form>-->
+<!--{% endblock %}-->
