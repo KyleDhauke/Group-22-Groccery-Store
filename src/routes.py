@@ -3,7 +3,7 @@ from flask import render_template, url_for, abort, request, redirect, flash, ses
 from flask_login import login_user, logout_user, current_user, login_required
 # from src.models import User, Product, Order, load_user
 from src.models import User,List,lists_landmarks,Landmark
-from src.forms import RegistrationForm, ReviewForm, LoginForm, CreatelistForm #, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
+from src.forms import RegistrationForm, ReviewForm, LoginForm # CreatelistForm, EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
 from werkzeug.utils import secure_filename
 import os
 import time
