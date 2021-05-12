@@ -109,6 +109,7 @@ function addmarker_to_db(String lnd_title,String description,String tags){
         database:,
     })
     connection.connect();
+//    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('lnd_title','description','tags')';
     var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('lnd_title','description','tags')';
     connection.query(addSql,function (err, result) {
         if(err){
