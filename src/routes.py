@@ -1,4 +1,4 @@
-from src import app, db, APP_PATH
+from src import app, db
 from flask import render_template, url_for, abort, request, redirect, flash, session, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 # from src.models import User, Product, Order, load_user

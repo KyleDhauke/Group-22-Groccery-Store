@@ -67,24 +67,6 @@ class LoginForm(FlaskForm):
     )
     submit = SubmitField("Login")
 
-class CreatelistForm(FlaskForm):
-
-    def validate_listname(self, listname):
-        list = List.query.filter_by(name=listname.data).first()
-        if list:
-            raise ValidationError(
-                'There is already a list named "' + listname.data + '".')
-
-    listname = StringField(
-        "List Name",
-        validators=[
-            DataRequired(),
-            #validate_listname
-        ]
-    )
-
-    submit = SubmitField("CreateList")
-
 #class CheckoutForm(FlaskForm):
 #
 #    name = StringField("Full Name", validators=[DataRequired(), Regexp(r'^[A-Za-z]', message=("Error Name: Please enter alphabetical characters")), Length(min=1, max=50, message=("Name: Please enter 1 to 50 characters"))])
