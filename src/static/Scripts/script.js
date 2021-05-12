@@ -81,6 +81,7 @@ function initMap() {
         const infoWindow = new google.maps.InfoWindow({
             content:  trial,
         });
+
         marker.addListener("click",()=>{
         // window.alert("Thats a marker!");
             setTimeout(markerClick(marker, infoWindow), 6000);
