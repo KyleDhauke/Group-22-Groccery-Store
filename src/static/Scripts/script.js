@@ -1,6 +1,12 @@
 let map;
 
 function initMap() {
+//          var icon1 = {
+//                url:"static/icons/landmark.png",
+//                size: new google.maps.Size(50,50)
+//                origin: new google.maps.Point(0,0),
+//                anchor: new google.maps.Point(0,0)
+//          }
           if(navigator.geolocation){
               navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -31,6 +37,7 @@ function initMap() {
             //     map: map,
             //     title: "Hello World!",
             // });
+
             map.addListener("dblclick", (e) => {
               placemarker(e, map);
 
@@ -43,8 +50,8 @@ function initMap() {
                 },
                 map: map,
                 title: "Check",
-                icon: "static/icons/landmark.png"
-                
+//                icon: icon1
+//                icon: "static/icons/landmark.png"
               });
               const infoWindow = new google.maps.InfoWindow({
                 content: "<p>Relaxing Spot to read my favourite book!</p>",
