@@ -60,14 +60,17 @@ class Landmark(db.Model):
      landmarkid = db.Column(db.Integer, primary_key=True, nullable=False)
      # Name of the landmark.
      name = db.Column(db.String(120), nullable=False)
-     # Cover image for this landmark.
-     coverImage = db.Column(db.String(128), nullable=False)
+     # Description for this landmark.
+     description = db.Column(db.String(128), nullable=False)
+     # Tags for this landmark.
+     tags = db.Column(db.String(255))
+
 
      def get_id(self):
          return self.landmarkid
 
      def __repr__(self):
-         return f"Landmark('{self.name}', '{self.coverImage}')"
+         return f"Landmark('{self.name}', '{self.description}')"
 
 class List(db.Model):
     # Unique identifier of this list.

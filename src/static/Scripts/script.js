@@ -81,7 +81,7 @@ function initMap() {
         const infoWindow = new google.maps.InfoWindow({
             content:  trial,
         });
-
+        addmarker_to_db(lnd_title,description,tags);
         marker.addListener("click",()=>{
         // window.alert("Thats a marker!");
             setTimeout(markerClick(marker, infoWindow), 6000);
@@ -99,3 +99,26 @@ function initMap() {
 
 }
 google.maps.event.addDomListener(window, 'load', initMap);
+
+function addmarker_to_db(String lnd_title,String description,String tags){
+    var mysql = require('mysql');
+    var connection = mysql.createConnection({
+        host:,
+        user:,
+        password:,
+        database:,
+    })
+    connection.connect();
+    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('lnd_title','description','tags')';
+    connection.query(addSql,function (err, result) {
+        if(err){
+         console.log('[INSERT ERROR] - ',err.message);
+         return;
+        }
+
+       console.log('--------------------------INSERT----------------------------');
+       //console.log('INSERT ID:',result.insertId);
+       console.log('INSERT ID:',result);
+       console.log('-----------------------------------------------------------------\n\n');
+    });
+}
