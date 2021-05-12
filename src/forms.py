@@ -85,6 +85,7 @@ class CreatelistForm(FlaskForm):
 
     submit = SubmitField("CreateList")
 
+
 #class CheckoutForm(FlaskForm):
 #
 #    name = StringField("Full Name", validators=[DataRequired(), Regexp(r'^[A-Za-z]', message=("Error Name: Please enter alphabetical characters")), Length(min=1, max=50, message=("Name: Please enter 1 to 50 characters"))])
