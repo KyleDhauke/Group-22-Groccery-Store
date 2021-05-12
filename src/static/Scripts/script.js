@@ -1,4 +1,5 @@
 let map;
+const overlay = document.getElementById("controls");
 
 function initMap() {
 //          var icon1 = {
@@ -65,6 +66,8 @@ function initMap() {
 //            icon: icon1
 //            icon: "static/icons/landmark.png"
         });
+        // const info = document.createElement("div");
+        // overlay.appendChild(info);
         var lnd_title = window.prompt("What Would You Like To Title This Landmark?");
         var description = window.prompt("What Description would you like to give?");
         var tags = window.prompt("What Tags Would You Like? (separate the tags with a comma)");
@@ -103,10 +106,10 @@ google.maps.event.addDomListener(window, 'load', initMap);
 function addmarker_to_db(lnd_title,description,tags){
     var mysql = require('mysql');
     var connection = mysql.createConnection({
-        host: csmysql.cs.cf.ac.uk,
-        user: c1932063,
-        password: Team22project,
-        database: landmark,
+        host: 'csmysql.cs.cf.ac.uk',
+        user: 'c1932063',
+        password: 'Team22project',
+        database: 'c1932063_Team22project',
     })
     connection.connect();
 //    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('lnd_title','description','tags')';
