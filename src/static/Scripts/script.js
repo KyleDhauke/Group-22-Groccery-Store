@@ -100,17 +100,17 @@ function initMap() {
 }
 google.maps.event.addDomListener(window, 'load', initMap);
 
-function addmarker_to_db(String lnd_title,String description,String tags){
+function addmarker_to_db(lnd_title,description,tags){
     var mysql = require('mysql');
     var connection = mysql.createConnection({
-        host:,
-        user:,
-        password:,
-        database:,
+        host: csmysql.cs.cf.ac.uk,
+        user: c1932063,
+        password: Team22project,
+        database: landmark,
     })
     connection.connect();
 //    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('lnd_title','description','tags')';
-    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('lnd_title','description','tags')';
+    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('+lnd_title+','+description+','+tags+')';
     connection.query(addSql,function (err, result) {
         if(err){
          console.log('[INSERT ERROR] - ',err.message);
