@@ -80,7 +80,7 @@ def register():
         send_email(user.email, 'Confirm Your Account',
                    'auth/confirm',user=user,token=token)
         flash('A confirmation email has been sent to you by email.')
-        return redirect(url_for("login"))
+        return redirect(url_for("home"))
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/confirm/<token>')

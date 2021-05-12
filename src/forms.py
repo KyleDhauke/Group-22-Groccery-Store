@@ -16,13 +16,6 @@ class RegistrationForm(FlaskForm):
             Length(min=3, max=20),
         ]
     )
-
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user:
-            raise ValidationError(
-                'There is already a user account registered with the email address "' + email.data + '".')
-
     email = StringField(
         'Email Address',
         validators=[
@@ -31,7 +24,11 @@ class RegistrationForm(FlaskForm):
             #validate_email
         ]
     )
-
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(
+                'There is already a user account registered with the email address "' + email.data + '".')
 
     password = PasswordField(
         'Password',
@@ -68,13 +65,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class CreatelistForm(FlaskForm):
-
-    def validate_listname(self, listname):
-        list = List.query.filter_by(name=listname.data).first()
-        if list:
-            raise ValidationError(
-                'There is already a list named "' + listname.data + '".')
-
     listname = StringField(
         "List Name",
         validators=[
@@ -82,6 +72,11 @@ class CreatelistForm(FlaskForm):
             #validate_listname
         ]
     )
+    def validate_listname(self, listname):
+        list = List.query.filter_by(name=listname.data).first()
+        if list:
+            raise ValidationError(
+                'There is already a list named "' + listname.data + '".')
 
     submit = SubmitField("CreateList")
 
