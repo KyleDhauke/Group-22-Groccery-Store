@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from flask_mail import Mail,Message
 import os
 
-
+#undoing bad commit
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
@@ -52,6 +52,3 @@ mail = Mail(app)
 app.config['UPLOAD_FOLDER'] = "static/Media/ProductImages"
 
 from src import routes
-
-
-
