@@ -1,19 +1,39 @@
 
-<!--{% extends "layout.html" %}-->
-<!--{% block content %}-->
+{% extends "layout.html" %}
+{% block content %}
 
-<!--	<head>-->
-<!--		<link rel="stylesheet" href="{{ url_for('static',filename='Stylesheets/accountDetails.css') }}">-->
-<!--	</head>-->
-<!--	<div class="container">-->
-<!--		<br>-->
-<!--		<h3 class="mainTitle">ACCOUNT DETAILS:</h3>-->
-<!--		<br>-->
-<!--        <label for="email" class="label1">User's Email Address:</label>-->
-<!--        <input type="text" class="input2" id="email" name="email" placeholder="johnsmith@example.com">-->
-<!--			-->
-<!--		<input type="submit" value="Change email address" class="btn">-->
-<!--		<input type="submit" value="Change password" class="btn">-->
-<!--	</div>-->
-<!--	-->
-<!--{% endblock content %}-->
+	<head>
+		<link rel="stylesheet" href="{{ url_for('static',filename='Stylesheets/accountDetails.css') }}">
+	</head>
+	<div class="container">
+        <br>
+        <div><img class="uimage" src="{{ url_for('static',filename='icons/profile.png') }}" alt="profile image"></div>
+        
+		<br>
+		<h3 class="mainTitle">ACCOUNT DETAILS:</h3>
+        <br>
+        
+       <label for="email" class="label1">Email Address:</label>
+       <input type="text" class="input2" id="email" name="email" placeholder={{current_user.email}}>
+       <br>
+
+       <label for="name" class="label1">Username:</label>
+       <input type="text" class="input2" id="name" name="name" placeholder={{current_user.username}}>
+			
+        <input type="submit" value="Change email address" class="btn">
+        <input type="submit" value="Change Username" class="btn">
+		<input type="submit" value="Change password" class="btn">
+    </div>
+    <div class = "lists">
+		<br>
+		<h3 class="mainTitle">Lists: </h3>
+        <br>
+        {% for i in range(lists|length) %}
+            <tr class = "list_item">
+                <td>{{lists[i].listid}}</td>
+                <td><a href="{{ url_for('landmarks', listid = lists[i].listid) }}">{{lists[i].name}}</a></td>
+            </tr>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock content %}

@@ -77,14 +77,15 @@ function initMap() {
                          '<h1 id="firstHeading" class="firstHeading">'+lnd_title+'</h1>' +
                          '<div id="bodyContent">' +
                          "<p>"+description+"</p>" +
-                         "<p><b>Tags: </b>"+tags+"</p>" +
+                         "<p><b>Tags: </b>"+tags+"</p>" + 
+                        //  '<button type="button">Add to List</button>'+
                          "</div>" +
                       "</div>";
 
         const infoWindow = new google.maps.InfoWindow({
             content:  trial,
         });
-        addmarker_to_db(lnd_title,description,tags);
+        //addmarker_to_db(lnd_title,description,tags);
         marker.addListener("click",()=>{
         // window.alert("Thats a marker!");
             setTimeout(markerClick(marker, infoWindow), 6000);
@@ -109,11 +110,12 @@ function addmarker_to_db(lnd_title,description,tags){
         host: 'csmysql.cs.cf.ac.uk',
         user: 'c1932063',
         password: 'Team22project',
-        database: 'c1932063_Team22project',
+        database: 'c1932063_Team22Year2',
     })
     connection.connect();
+
 //    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('lnd_title','description','tags')';
-    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('+lnd_title+','+description+','+tags+')';
+    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('+lnd_title.toString()+','+description.toString()+','+tags.toString()+')';
     connection.query(addSql,function (err, result) {
         if(err){
          console.log('[INSERT ERROR] - ',err.message);
@@ -122,7 +124,7 @@ function addmarker_to_db(lnd_title,description,tags){
 
        console.log('--------------------------INSERT----------------------------');
        //console.log('INSERT ID:',result.insertId);
-       console.log('INSERT ID:',result);
+       console.log(result);
        console.log('-----------------------------------------------------------------\n\n');
     });
 }

@@ -29,7 +29,8 @@ def home():
     #if form.validate_on_submit():
     #    addtocart(form)
 
-    seed(int(round(time.time() * 1000)))
+    #seed(int(round(time.time() * 1000)))
+    lists = List.query.order_by(List.name)
     # possible_choices = []
     # product_data = Product.query.filter_by(active=True)
     # for product in product_data:
@@ -37,7 +38,7 @@ def home():
     # chosen = choice(possible_choices)
     # product = Product.query.get_or_404(chosen)
     # return render_template('home.html', title='Home', product_data=product, addcartform=form)
-    return render_template('home.html')
+    return render_template('home.html', lists=lists)
     #, form=form)
 
 # @app.route("/about")
@@ -97,7 +98,8 @@ def confirm(token):
 
 @app.route("/accountDetails")
 def accountDetails():
-    return render_template('accountDetails.html', title='accountDetails')
+    lists = List.query.all()
+    return render_template('accountDetails.html', title='accountDetails', lists=lists)
 
 # @app.route("/confirm")
 # def confirm():

@@ -8,7 +8,13 @@
   <input type="text" placeholder="Search...">
 </div>
 <div id="controls">
-  <div id="googleMap"></div>
+  <div id="googleMap">
+    <div style="visibility: hidden" id="lists_view">
+      {% for list in lists.items %}
+           <h3 class="name">{{ list.name }}</h3>
+      {%endfor%}
+    </div>
+  </div>
 </div>
 
 {% endblock content %}

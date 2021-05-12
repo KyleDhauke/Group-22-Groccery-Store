@@ -1,20 +1,49 @@
 .content{
-	width:400px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
+  width:100%;
 }
 
 .container {
-  background-color: #9055A2;
+  background-color:white;
   padding: 5px 20px 15px 20px;
   border: 1px solid lightgrey;
   border-radius: 3px;
+  width: 400px;
+  margin-left: 0;
+	margin-right: 90px;
+	margin-top: 20px;
+  margin-bottom: 10px;
+  float: right;
 }
 
+.lists{
+  background-color:white;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  width: 400px;
+  margin-left: 0;
+	margin-right: 100px;
+	margin-top: 20px;
+  margin-bottom: 10px;
+  float: right;
+}
+.uimage{
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+}
+
+.list_item{
+  width: 20px;
+  font-family: monospace;
+}
+
+.list_item:hover{
+  background-color: black;
+  color: white;
+}
 .mainTitle{
-	color: #ffffff;
+	color: black;
 	font-size:25px;
 	font-weight: bold;
 }
@@ -36,7 +65,7 @@
 
 .label1 {
   margin-bottom: 10px;
-  color: #ffffff;
+  color: black;
   display: block;
   font-weight:bold;
 }
