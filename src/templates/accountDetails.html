@@ -20,20 +20,10 @@
        <label for="name" class="label1">Username:</label>
        <input type="text" class="input2" id="name" name="name" placeholder={{current_user.username}}>
 			
-        <input type="submit" value="Change email address" class="btn">
-        <input type="submit" value="Change Username" class="btn">
-		<input type="submit" value="Change password" class="btn">
+        <a href="{{ url_for('change_email') }}"><input type="submit" value="Change email address" class="btn" id="c_email"></a>
+        <a href="{{ url_for('change_username') }}"><input type="submit" value="Change Username" class="btn" id="c_name"></a>
+		<a href="{{ url_for('change_password') }}"><input type="submit" value="Change password" class="btn" id="c_password"></a>
     </div>
-    <div class = "lists">
-		<br>
-		<h3 class="mainTitle">Lists: </h3>
-        <br>
-        {% for i in range(lists|length) %}
-            <tr class = "list_item">
-                <td>{{lists[i].listid}}</td>
-                <td><a href="{{ url_for('landmarks', listid = lists[i].listid) }}">{{lists[i].name}}</a></td>
-            </tr>
-            <hr>
-        {% endfor %}
-    </div>
+
+
 {% endblock content %}

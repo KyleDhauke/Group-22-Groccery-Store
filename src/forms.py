@@ -128,6 +128,48 @@ class MarkerInfo(FlaskForm):
     submit = SubmitField("complete")
 
 
+class ChangeusernameForm(FlaskForm):
+    username = StringField(
+        "Username",
+        validators=[
+            DataRequired("User name cannot be empty!"),
+            Length(min=3, max=20),
+        ]
+    )
+    submit = SubmitField("Change")
+
+class ChangeemailForm(FlaskForm):
+    email = StringField(
+        "Email Address",
+        validators=[
+            DataRequired(),
+            Email("The mailbox format is incorrect!")
+            #validate_email
+        ]
+    )
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(
+                'There is already a user account registered with the email address "' + email.data + '".')
+    submit = SubmitField("Change")
+
+class ChangepasswordForm(FlaskForm):
+    password = PasswordField(
+        "Password",
+        validators=[
+            # DataRequired()
+        ]
+    )
+    confirm_password = PasswordField(
+        'Confirm Password',
+        validators=[
+            DataRequired("Password cannot be empty!"),
+            EqualTo('password', message="The two passwords don't match!")
+        ]
+    )
+    submit = SubmitField("Change")
+
 #class CheckoutForm(FlaskForm):
 #
 #    name = StringField("Full Name", validators=[DataRequired(), Regexp(r'^[A-Za-z]', message=("Error Name: Please enter alphabetical characters")), Length(min=1, max=50, message=("Name: Please enter 1 to 50 characters"))])
