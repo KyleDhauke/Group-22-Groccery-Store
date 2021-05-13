@@ -32,7 +32,13 @@ def home():
     #seed(int(round(time.time() * 1000)))
     form = MarkerInfo()
     lists = List.query.order_by(List.name)
-    all_markers = Landmark.query.filter_by(userid=current_user.id)
+    all_markers = Landmark.query.all()
+    if(current_user.is_authenticated):
+        for x in all_markers:
+            print(x.userid)
+            print(current_user.id)
+            if x.userid != current_user.id:
+                all_markers.remove(x)
     # print("hello")
     # print(form.description.data)
     # print(form.name.data)
