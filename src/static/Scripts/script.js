@@ -1,14 +1,11 @@
-let map;
-
-function initialize() {
+var map;
+function initMap() {
 //          var icon1 = {
 //                url:"static/icons/landmark.png",
 //                size: new google.maps.Size(50,50)
 //                origin: new google.maps.Point(0,0),
 //                anchor: new google.maps.Point(0,0)
 //          }
-    getLocation();
-    document.getElementById("starter").click();
     function getLocation(){
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition(
@@ -24,6 +21,7 @@ function initialize() {
             );
         }
     }
+    getLocation();
     var mapProp = {
         center:new google.maps.LatLng(51.475, -3.17),
         zoom:13,
@@ -102,34 +100,33 @@ function initialize() {
        map.setCenter(e.getPosition());
        info.open(map, e);
     };
-    function loadMarkers(all_markers){
+    
+    function loadMarkers(){
         var nice = "";
-        for(i =0; i<all_markers.length;i++){
-            let marker = new google.maps.Marker({
-                position: {
-                    lat: all_markers[i].lat,
-                    lng: all_markers[i].lng,
-                },
-                map: map,
-                title: "Check",
-            }),
+        let marker;
+        marker = new google.maps.Marker({
+            position: {
+                lat: document.getElementById("final_lat").value,
+                lng: document.getElementById("final_lng").value,
+            },
+            map: map,
+            title: ":)",
+        }),
 
-            nice = '<div id="content">' +
-                '<div id="siteNotice">' +
-                "</div>" +
-                '<h1 id="firstHeading" class="firstHeading">'+all_markers[i].name+'</h1>' +
-                '<div id="bodyContent">' +
-                "<p>"+all_markers[i].description+"</p>" +
-                "<p><b>Tags: </b>"+all_markers[i].tags+"</p>" + 
-               //  '<button type="button">Add to List</button>'+
-                "</div>" +
-             "</div>";
-            
-             const Iw = new google.maps.InfoWindow({
-                content: nice,
-             });
-            
-        }
+        nice = '<div id="content">' +
+            '<div id="siteNotice">' +
+            "</div>" +
+            '<h1 id="firstHeading" class="firstHeading">'+document.getElementById("final_name").value+'</h1>' +
+            '<div id="bodyContent">' +
+            "<p>"+document.getElementById("final_description").value+"</p>" +
+            "<p><b>Tags: </b>"+document.getElementById("final_tags").value+"</p>" + 
+            //  '<button type="button">Add to List</button>'+
+            "</div>" +
+            "</div>";
+        
+            const Iw = new google.maps.InfoWindow({
+            content: nice,
+            });
         marker.addListener("click",()=>{
             setTimeout(markerClick(marker, Iw), 600);
         });
@@ -138,4 +135,4 @@ function initialize() {
         });
     }
 }
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initMap);

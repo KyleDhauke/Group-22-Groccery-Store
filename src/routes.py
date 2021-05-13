@@ -34,11 +34,10 @@ def home():
     lists = List.query.order_by(List.name)
     all_markers = Landmark.query.all()
     if(current_user.is_authenticated):
-        for x in all_markers:
-            print(x.userid)
-            print(current_user.id)
-            if x.userid != current_user.id:
-                all_markers.remove(x)
+        for o in all_markers:
+            for x in all_markers:
+                if x.userid != current_user.id:
+                    all_markers.remove(x)
     # print("hello")
     # print(form.description.data)
     # print(form.name.data)

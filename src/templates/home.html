@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static',filename='Stylesheets/home.css') }}">
-<script src = "{{ url_for('static',filename='Scripts/script.js') }}"></script>
-
-
+<script src="{{ url_for('static',filename='Scripts/script.js') }}"></script>
 <div class="topnav">
   <input type="text" placeholder="Search...">
 </div>
@@ -30,7 +28,16 @@
            <p id="load_lat">marker.lat</p>
            <p id="load_lng">marker.lng</p>
     {%endfor%} -->
-    <button id="starter" onclick="loadMarkers(all_markers)"></button>
+    <!-- <form id="vals"action="loadMarkers({{all_markers}})">
+      <p id="kanye">{{all_markers.items}}</p>
+    </form> -->
+    {% for marker in all_markers%}
+      <p id = "final_name">{{marker.name}}</p>
+      <p id = "final_description">{{marker.description}}</p>
+      <p id = "final_tags">{{marker.tags}}</p>
+      <p id = "final_lat">{{marker.lat}}</p>
+      <p id = "final_lng">{{marker.lng}}</p>    
+    {%endfor%}
   </div>
 </div>
 <div>
@@ -44,5 +51,4 @@
     <input type="submit" value="" id="complete">
   </form>
 </div>
-
 {% endblock content %}
