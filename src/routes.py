@@ -32,6 +32,7 @@ def home():
     #seed(int(round(time.time() * 1000)))
     form = MarkerInfo()
     lists = List.query.order_by(List.name)
+    all_markers = Landmark.query.filter_by(userid=current_user.id)
     # print("hello")
     # print(form.description.data)
     # print(form.name.data)
@@ -50,7 +51,7 @@ def home():
     # chosen = choice(possible_choices)
     # product = Product.query.get_or_404(chosen)
     # return render_template('home.html', title='Home', product_data=product, addcartform=form)
-    return render_template('home.html', lists=lists, form=form)
+    return render_template('home.html', lists=lists, form=form, all_markers=all_markers)
     #, form=form)
 
 # @app.route("/about")

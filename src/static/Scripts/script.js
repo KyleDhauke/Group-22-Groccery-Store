@@ -1,13 +1,14 @@
 let map;
 
-function initMap() {
+function initialize() {
 //          var icon1 = {
 //                url:"static/icons/landmark.png",
 //                size: new google.maps.Size(50,50)
 //                origin: new google.maps.Point(0,0),
 //                anchor: new google.maps.Point(0,0)
 //          }
-    getLocation()
+    getLocation();
+    document.getElementById("starter").click();
     function getLocation(){
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition(
@@ -62,11 +63,8 @@ function initMap() {
             },
             map: map,
             title: "Check",
-//            icon: icon1
-//            icon: "static/icons/landmark.png"
+
         });
-        // const info = document.createElement("div");
-        // overlay.appendChild(info);
         var lnd_title = window.prompt("What Would You Like To Title This Landmark?");
         var description = window.prompt("What Description would you like to give?");
         var tags = window.prompt("What Tags Would You Like? (separate the tags with a comma)");
@@ -79,14 +77,6 @@ function initMap() {
         form.elements["lat"].value = lat;
         form.elements["lng"].value = lng;
         form.submit();
-        // document.getElementById("title").innerHTML = lnd_title;
-        // var c = document.getElementById("title");
-        // console.log(c.value);
-        // document.getElementById("description").innerHTML = description;
-        // document.getElementById("tags").innerHTML = tags;
-        // document.getElementById("lat").innerHTML = e.latLng.lat;
-        // document.getElementById("lng").innerHTML = e.latLng.lng;
-        //document.getElementById("complete").click();
         var trial =  '<div id="content">' +
                          '<div id="siteNotice">' +
                          "</div>" +
@@ -101,7 +91,6 @@ function initMap() {
         const infoWindow = new google.maps.InfoWindow({
             content:  trial,
         });
-        //addmarker_to_db(lnd_title,description,tags);
         marker.addListener("click",()=>{
             setTimeout(markerClick(marker, infoWindow), 6000);
         });
@@ -112,32 +101,41 @@ function initMap() {
     function markerClick(e, info){
        map.setCenter(e.getPosition());
        info.open(map, e);
-    }
+    };
+    function loadMarkers(all_markers){
+        var nice = "";
+        for(i =0; i<all_markers.length;i++){
+            let marker = new google.maps.Marker({
+                position: {
+                    lat: all_markers[i].lat,
+                    lng: all_markers[i].lng,
+                },
+                map: map,
+                title: "Check",
+            }),
 
-}
-google.maps.event.addDomListener(window, 'load', initMap);
-
-function addmarker_to_db(lnd_title,description,tags){
-    var mysql = require('mysql');
-    var connection = mysql.createConnection({
-        host: 'csmysql.cs.cf.ac.uk',
-        user: 'c1932063',
-        password: 'Team22project',
-        database: 'c1932063_Team22Year2',
-    })
-    connection.connect();
-
-//    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('lnd_title','description','tags')';
-    var addSql = 'INSERT INTO landmark(name,description,tags) VALUES('+lnd_title.toString()+','+description.toString()+','+tags.toString()+')';
-    connection.query(addSql,function (err, result) {
-        if(err){
-         console.log('[INSERT ERROR] - ',err.message);
-         return;
+            nice = '<div id="content">' +
+                '<div id="siteNotice">' +
+                "</div>" +
+                '<h1 id="firstHeading" class="firstHeading">'+all_markers[i].name+'</h1>' +
+                '<div id="bodyContent">' +
+                "<p>"+all_markers[i].description+"</p>" +
+                "<p><b>Tags: </b>"+all_markers[i].tags+"</p>" + 
+               //  '<button type="button">Add to List</button>'+
+                "</div>" +
+             "</div>";
+            
+             const Iw = new google.maps.InfoWindow({
+                content: nice,
+             });
+            
         }
-
-       console.log('--------------------------INSERT----------------------------');
-       //console.log('INSERT ID:',result.insertId);
-       console.log(result);
-       console.log('-----------------------------------------------------------------\n\n');
-    });
+        marker.addListener("click",()=>{
+            setTimeout(markerClick(marker, Iw), 6000);
+        });
+        marker.addListener("dblclick",()=>{
+            marker.setMap(null);
+        });
+    }
 }
+google.maps.event.addDomListener(window, 'load', initialize);
