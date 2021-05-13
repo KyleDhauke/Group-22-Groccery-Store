@@ -36,7 +36,46 @@
       <p id = "final_description">{{marker.description}}</p>
       <p id = "final_tags">{{marker.tags}}</p>
       <p id = "final_lat">{{marker.lat}}</p>
-      <p id = "final_lng">{{marker.lng}}</p>    
+      <p id = "final_lng">{{marker.lng}}</p> 
+      <script>
+        
+         var n = '{{marker.name}}';
+         var d = '{{marker.description}}';
+         var t = '{{marker.tags}}';
+         var latt = '{{marker.lat}}';
+         var lngg = '{{marker.lng}}';
+        //  var nice = "";
+        // var marker;
+        // marker = new google.maps.Marker({
+        //     position: {
+        //         lat: parseFloat(latt),
+        //         lng: parseFloat(lngg),
+        //     },
+        //     map: map,
+        //     title: ":)",
+        // })
+
+        // nice = '<div id="content">' +
+        //     '<div id="siteNotice">' +
+        //     "</div>" +
+        //     '<h1 id="firstHeading" class="firstHeading">'+String(n)+'</h1>' +
+        //     '<div id="bodyContent">' +
+        //     "<p>"+String(d)+"</p>" +
+        //     "<p><b>Tags: </b>"+String(t)+"</p>" + 
+        //     //  '<button type="button">Add to List</button>'+
+        //     "</div>" +
+        //     "</div>";
+        
+        //     var Iw = new google.maps.InfoWindow({
+        //     content: nice,
+        //     });
+        // marker.addListener("click",()=>{
+        //     setTimeout(markerClick(marker, Iw), 600);
+        // });
+        // marker.addListener("dblclick",()=>{
+        //     marker.setMap(null);
+        // });
+      </script>   
     {%endfor%}
   </div>
 </div>
