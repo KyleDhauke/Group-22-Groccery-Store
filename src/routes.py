@@ -138,11 +138,21 @@ def lists():
 def createlists():
     form = CreatelistForm()
     if (form.validate_on_submit()):
-        user = User(username=form.username.data, email=current_user.email, password=current_user.password)
+        list = List(name=form.listname.data,userid = current_user.id)
         db.session.add(list)
         db.session.commit()
         return redirect(url_for("lists"))
     return render_template('createlists.html', title='Createlists',form = form)
+
+@app.route("/landmarks/<listid>")
+def landmarks(listid):
+    #All the landmarks in a list of list_landmarks table
+    landmarks_data_id = lists_landmarks.query.filter(lists_landmarks.listid == listid).all()
+    #All the landmarks from that list
+    landmarks_data = []
+    for i in range(len(landmarks_data_id)):
+        landmarks_data.extend(Landmark.query.filter(Landmark.landmarkid == landmarks_data_id[i].landmarkid,Landmark.userid == current_user.id).all())
+    return render_template('landmark.html',landmarks_data = landmarks_data)
 
 @app.route("/change_username", methods=['GET','POST'])
 def change_username():
@@ -164,7 +174,6 @@ def change_email():
         return redirect(url_for("accountDetails"))
     return render_template('changeemail.html',title='ChangeEmail',form=form)
 
-
 @app.route("/change_password", methods=['GET','POST'])
 def change_password():
     form = ChangepasswordForm()
@@ -175,15 +184,7 @@ def change_password():
         return redirect(url_for("login"))
     return render_template('changepassword.html',title='ChangePassword',form=form)
 
-@app.route("/landmarks/<listid>")
-def landmarks(listid):
-    #All the landmarks in a list of list_landmarks table
-    landmarks_data_id = lists_landmarks.query.filter(lists_landmarks.listid == listid).all()
-    #All the landmarks from that list
-    landmarks_data = []
-    for i in range(len(landmarks_data_id)):
-        landmarks_data.extend(Landmark.query.filter(Landmark.landmarkid == landmarks_data_id[i].landmarkid).all())
-    return render_template('landmark.html',landmarks_data = landmarks_data)
+
 
 # @app.route("/basket")
 # def basket():

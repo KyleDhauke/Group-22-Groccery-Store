@@ -80,6 +80,7 @@ class List(db.Model):
     listid = db.Column('listid',db.Integer, primary_key=True)
     # Name of the list.
     name = db.Column(db.String(120), nullable=False)
+    userid = db.Column(db.Integer,nullable=False)
 
 # lists_landmarks = db.Table('lists_landmarks',
 #                            db.Column('listid',db.Integer,db.ForeignKey('lists.listid'),primary_key=True),
