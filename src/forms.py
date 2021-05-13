@@ -3,11 +3,6 @@ from wtforms import StringField, PasswordField, SubmitField, TextAreaField, Deci
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
 from src.models import User,List
 
-# def validate_email(self, email):
-#     user = User.query.filter_by(email=email.data).first()
-#     if user:
-#         raise ValidationError('There is already a user account registered with the email address "' + email.data + '".')
-
 class RegistrationForm(FlaskForm):
     username = StringField(
         "Username",
@@ -170,48 +165,7 @@ class ChangepasswordForm(FlaskForm):
     )
     submit = SubmitField("Change")
 
-#class CheckoutForm(FlaskForm):
-#
-#    name = StringField("Full Name", validators=[DataRequired(), Regexp(r'^[A-Za-z]', message=("Error Name: Please enter alphabetical characters")), Length(min=1, max=50, message=("Name: Please enter 1 to 50 characters"))])
-#    email = StringField("Email Address", validators=[DataRequired()])
-#    address = StringField("Address", validators=[DataRequired()])
-#    city = StringField("City", validators=[DataRequired(), Regexp(r'^[A-Za-z]', message=("Error City: Please enter alphabetical characters"))])
-#    postcode = StringField("Postcode", validators=[DataRequired(), Length(min=6, max=8, message=("Error Postcode: Please enter 6 to 8 characters"))])
-#    cname = StringField("Name on Card", validators=[DataRequired(), Regexp(r'^[A-Za-z]', message=("Error Name: Please enter alphabetical characters")), Length(min=1, max=50)])
-#    ccnum = StringField("Credit card number", validators=[DataRequired(), Length(min=16, max=16, message=("Error Card number: Please enter 16 characters"))])
-#    expmonth = DateTimeField ("Expiry Date", format="%m/%y", validators=[DataRequired()])
-#    cvv = StringField("CVV", validators=[DataRequired(), Length(min=3, max=3, message=("Error CVV: Please enter 3 characters"))])
-#
-#    submit = SubmitField("Continue to checkout")
-#
-#
-#class SearchForm(FlaskForm):
-#    search = StringField("")
-#    submit = SubmitField("")
-#
-#    price = DecimalField(0.0, validators=[DataRequired()])
-#    image = FileField("Cover Image")
-#    name = StringField("", validators=[DataRequired()])
-#    description = TextAreaField("", validators=[DataRequired()])
-#    submit = SubmitField("Save")
-#
-#class PublishProductForm(FlaskForm):
-#    publishbutton = SubmitField("Publish")
-#
-#class UnpublishProductForm(FlaskForm):
-#    publishbutton = SubmitField("Unpublish")
-#
-#class DeleteProductForm(FlaskForm):
-#    cancel = SubmitField("Cancel")
-#    submit = SubmitField("Delete Forever")
-#
-#class AllProductsForm(FlaskForm):
-#    submit=SubmitField("Sort")
-#
+
 class ReviewForm(FlaskForm):
     submit=SubmitField("Checkout")
-#
-#class AddCartForm(FlaskForm):
-#    product_id = HiddenField()
-#    quantity = IntegerField()
-#    submit=SubmitField("AddtoBasket")
+
