@@ -32,17 +32,15 @@ def home():
     #seed(int(round(time.time() * 1000)))
     form = MarkerInfo()
     lists = List.query.order_by(List.name)
-    print("hello")
-    print(form.description.data)
-    print(form.name.data)
-    print(form.tags.data)
-    print(form.lng.data)
-    print(form.lat.data)
+    # print("hello")
+    # print(form.description.data)
+    # print(form.name.data)
+    # print(form.tags.data)
+    # print(form.lng.data)
+    # print(form.lat.data)
     if (form.validate_on_submit()):
-        print("here")
-        landmark = landmark(name=form.name.data, description=form.description.data, 
+        landmark = Landmark(name=form.name.data, description=form.description.data, 
         tags=form.tags.data, lat=form.lat.data, lng=form.lng.data, userid=current_user.id)
-        print(form.name.data)
         db.session.add(landmark)
         db.session.commit()
     # possible_choices = []

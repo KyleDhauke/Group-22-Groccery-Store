@@ -96,20 +96,20 @@ class MarkerInfo(FlaskForm):
         ]
     )
     tags = StringField(
-        "Title",
+        "Tags",
         validators=[
             DataRequired(),
             #validate_listname
         ]
     )
-    lat = IntegerField(
+    lat = DecimalField(
         "Latitude",
         validators=[
             DataRequired(),
             #validate_listname
         ]
     )
-    lng = IntegerField(
+    lng = DecimalField(
         "Longitude",
         validators=[
             DataRequired(),
@@ -118,10 +118,10 @@ class MarkerInfo(FlaskForm):
     )
     userid = IntegerField(
         "userid",
-        validators=[
-            DataRequired(),
-            #validate_listname
-        ]
+        # validators=[
+        #     DataRequired(),
+        #     #validate_listname
+        # ]
     )
 
 

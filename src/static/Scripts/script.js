@@ -70,12 +70,23 @@ function initMap() {
         var lnd_title = window.prompt("What Would You Like To Title This Landmark?");
         var description = window.prompt("What Description would you like to give?");
         var tags = window.prompt("What Tags Would You Like? (separate the tags with a comma)");
-        document.getElementById("title").innerHTML = lnd_title;
-        document.getElementById("description").innerHTML = description;
-        document.getElementById("tags").innerHTML = tags;
-        document.getElementById("lat").innerHTML = e.latLng.lat;
-        document.getElementById("lng").innerHTML = e.latLng.lng;
-        document.getElementById("complete").click();
+        var lat = e.latLng.lat()
+        var lng = e.latLng.lng()
+        form = document.forms["info"];
+        form.elements["name"].value = lnd_title;
+        form.elements["description"].value = description;
+        form.elements["tags"].value = tags;
+        form.elements["lat"].value = lat;
+        form.elements["lng"].value = lng;
+        form.submit();
+        // document.getElementById("title").innerHTML = lnd_title;
+        // var c = document.getElementById("title");
+        // console.log(c.value);
+        // document.getElementById("description").innerHTML = description;
+        // document.getElementById("tags").innerHTML = tags;
+        // document.getElementById("lat").innerHTML = e.latLng.lat;
+        // document.getElementById("lng").innerHTML = e.latLng.lng;
+        //document.getElementById("complete").click();
         var trial =  '<div id="content">' +
                          '<div id="siteNotice">' +
                          "</div>" +

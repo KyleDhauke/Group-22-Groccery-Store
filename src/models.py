@@ -65,7 +65,8 @@ class Landmark(db.Model):
      # Tags for this landmark.
      tags = db.Column(db.String(255))
      lat = db.Column(db.Integer())
-     lang = db.Column(db.Integer())
+     lng = db.Column(db.Integer())
+     userid = db.Column(db.Integer())
 
 
      def get_id(self):
