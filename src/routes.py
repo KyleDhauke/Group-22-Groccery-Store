@@ -3,7 +3,7 @@ from flask import render_template, url_for, abort, request, redirect, flash, ses
 from flask_login import login_user, logout_user, current_user, login_required
 # from src.models import User, Product, Order, load_user
 from src.models import User,List,lists_landmarks,Landmark
-from src.forms import RegistrationForm, ReviewForm, LoginForm, CreatelistForm, MarkerInfo #EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
+from src.forms import RegistrationForm, ReviewForm, LoginForm, CreatelistForm, MarkerInfo, ChangeusernameForm, ChangeemailForm, ChangepasswordForm #EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
 from werkzeug.utils import secure_filename
 import os
 import time
@@ -114,9 +114,15 @@ def confirm(token):
         flash('The confirmation link is invalid or has expired.')
     return redirect(url_for('home'))
 
-@app.route("/accountDetails")
+@app.route("/accountDetails", methods=['GET', 'POST'])
 def accountDetails():
+    # form = AccountDetailsForm()
     lists = List.query.all()
+    # if form.validate_on_submit():
+    #     user = User(username=form.name.data, email=form.email.data, password=form.password.data)
+    #     db.session.add(user)
+    #     db.session.commit()
+    #     return redirect(url_for('accountDetails'))
     return render_template('accountDetails.html', title='accountDetails', lists=lists)
 
 # @app.route("/confirm")
@@ -132,12 +138,42 @@ def lists():
 def createlists():
     form = CreatelistForm()
     if (form.validate_on_submit()):
-        list = List(name=form.listname.data)
+        user = User(username=form.username.data, email=current_user.email, password=current_user.password)
         db.session.add(list)
         db.session.commit()
         return redirect(url_for("lists"))
     return render_template('createlists.html', title='Createlists',form = form)
 
+@app.route("/change_username", methods=['GET','POST'])
+def change_username():
+    form = ChangeusernameForm()
+    if (form.validate_on_submit()):
+        user = User.query.get(current_user.id)
+        user.username= form.username.data
+        db.session.commit()
+        return redirect(url_for("accountDetails"))
+    return render_template('changeusername.html',title='ChangeUsername',form=form)
+
+@app.route("/change_email", methods=['GET','POST'])
+def change_email():
+    form = ChangeemailForm()
+    if (form.validate_on_submit()):
+        user = User.query.get(current_user.id)
+        user.email= form.email.data
+        db.session.commit()
+        return redirect(url_for("accountDetails"))
+    return render_template('changeemail.html',title='ChangeEmail',form=form)
+
+
+@app.route("/change_password", methods=['GET','POST'])
+def change_password():
+    form = ChangepasswordForm()
+    if (form.validate_on_submit()):
+        user = User.query.get(current_user.id)
+        user.password= form.password.data
+        db.session.commit()
+        return redirect(url_for("login"))
+    return render_template('changepassword.html',title='ChangePassword',form=form)
 
 @app.route("/landmarks/<listid>")
 def landmarks(listid):

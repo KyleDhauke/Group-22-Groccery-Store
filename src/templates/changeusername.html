@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+    <head>
+        <title>ChangeUsername</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='Stylesheets/login.css') }}">
+    </head>
+    <body>
+        <form class="form-container" method="POST" action="">
+            {{ form.csrf_token }}
+            <div class="user-img"></div>
+                <ul class="list">
+                    <br><br><br>
+                    <li><h2>Change your username</h2></li>
+                    <br>
+                    <br>
+                    <li>{{ form.username.label }}</li>
+                    <li>{{ form.username }}</li>
+                    <div class="placeholder">
+                        {% for err in form.username.errors %}
+                          <div class="form-control">
+                              {{ err }}
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <br>
+                    <li><a href="{{ url_for('accountDetails') }}"><input type="submit" value="Change"></a></li>
+                </ul>
+        </form>
+    </body>
+    </html>
+ {% endblock content %}
