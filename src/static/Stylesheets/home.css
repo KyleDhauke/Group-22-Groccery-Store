@@ -38,3 +38,13 @@
   display: block;
   font-weight:bold;
 }
+
+.complete{
+  background-color: white;
+}
+
+p{
+  border-color: white;
+  border-width: 0cm;
+  background-color: white;
+}

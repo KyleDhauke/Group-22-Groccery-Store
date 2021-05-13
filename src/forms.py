@@ -81,8 +81,8 @@ class CreatelistForm(FlaskForm):
     submit = SubmitField("CreateList")
 
 class MarkerInfo(FlaskForm):
-    title = StringField(
-        "Title",
+    name = StringField(
+        "Name",
         validators=[
             DataRequired(),
             #validate_listname
@@ -125,7 +125,7 @@ class MarkerInfo(FlaskForm):
     )
 
 
-    submit = SubmitField("SendInfo")
+    submit = SubmitField("complete")
 
 
 #class CheckoutForm(FlaskForm):
