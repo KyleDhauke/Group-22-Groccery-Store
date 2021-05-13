@@ -13,8 +13,6 @@ class User(UserMixin, db.Model):
     email = db.Column(db.Text, nullable=False)
     passwordHash = db.Column(db.String(128))
     password = db.Column(db.String(60), nullable=False)
-    # admin = db.Column(db.Boolean, nullable=False)
-    # transactionid = db.Column(db.Integer, nullable = False, default=0)
     confirmed = db.Column(db.Boolean, default=False)
 
     def get_id(self):
