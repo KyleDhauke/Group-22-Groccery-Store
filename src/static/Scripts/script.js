@@ -106,8 +106,8 @@ function initMap() {
         let marker;
         marker = new google.maps.Marker({
             position: {
-                lat: document.getElementById("final_lat").value,
-                lng: document.getElementById("final_lng").value,
+                lat: parseFloat(latt),
+                lng: parseFloat(lngg),
             },
             map: map,
             title: ":)",
@@ -116,10 +116,10 @@ function initMap() {
         nice = '<div id="content">' +
             '<div id="siteNotice">' +
             "</div>" +
-            '<h1 id="firstHeading" class="firstHeading">'+document.getElementById("final_name").value+'</h1>' +
+            '<h1 id="firstHeading" class="firstHeading">'+String(n)+'</h1>' +
             '<div id="bodyContent">' +
-            "<p>"+document.getElementById("final_description").value+"</p>" +
-            "<p><b>Tags: </b>"+document.getElementById("final_tags").value+"</p>" + 
+            "<p>"+String(d)+"</p>" +
+            "<p><b>Tags: </b>"+String(t)+"</p>" + 
             //  '<button type="button">Add to List</button>'+
             "</div>" +
             "</div>";
@@ -133,6 +133,9 @@ function initMap() {
         marker.addListener("dblclick",()=>{
             marker.setMap(null);
         });
+    
     }
+    loadMarkers();
+    
 }
 google.maps.event.addDomListener(window, 'load', initMap);

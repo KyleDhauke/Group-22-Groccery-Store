@@ -38,6 +38,7 @@ def home():
             for x in all_markers:
                 if x.userid != current_user.id:
                     all_markers.remove(x)
+    print(type(all_markers))
     # print("hello")
     # print(form.description.data)
     # print(form.name.data)
