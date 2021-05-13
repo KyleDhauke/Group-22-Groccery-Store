@@ -92,7 +92,7 @@ function initialize() {
             content:  trial,
         });
         marker.addListener("click",()=>{
-            setTimeout(markerClick(marker, infoWindow), 6000);
+            setTimeout(markerClick(marker, infoWindow), 600);
         });
         marker.addListener("dblclick",()=>{
             marker.setMap(null);
@@ -131,7 +131,7 @@ function initialize() {
             
         }
         marker.addListener("click",()=>{
-            setTimeout(markerClick(marker, Iw), 6000);
+            setTimeout(markerClick(marker, Iw), 600);
         });
         marker.addListener("dblclick",()=>{
             marker.setMap(null);
