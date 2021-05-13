@@ -23,3 +23,18 @@
 .infobox{
   position: fixed;
 }
+
+.input2{
+  width: 95%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.label1 {
+  margin-bottom: 10px;
+  color: black;
+  display: block;
+  font-weight:bold;
+}

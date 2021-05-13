@@ -1,5 +1,4 @@
 let map;
-const overlay = document.getElementById("controls");
 
 function initMap() {
 //          var icon1 = {
@@ -71,6 +70,12 @@ function initMap() {
         var lnd_title = window.prompt("What Would You Like To Title This Landmark?");
         var description = window.prompt("What Description would you like to give?");
         var tags = window.prompt("What Tags Would You Like? (separate the tags with a comma)");
+        document.getElementById("title").innerHTML = lnd_title;
+        document.getElementById("description").innerHTML = description;
+        document.getElementById("tags").innerHTML = tags;
+        document.getElementById("lat").innerHTML = e.latLng.lat;
+        document.getElementById("lng").innerHTML = e.latLng.lng;
+        document.getElementById("complete").click();
         var trial =  '<div id="content">' +
                          '<div id="siteNotice">' +
                          "</div>" +
@@ -87,16 +92,13 @@ function initMap() {
         });
         //addmarker_to_db(lnd_title,description,tags);
         marker.addListener("click",()=>{
-        // window.alert("Thats a marker!");
             setTimeout(markerClick(marker, infoWindow), 6000);
         });
         marker.addListener("dblclick",()=>{
-        // window.alert("Thats a marker!");
             marker.setMap(null);
         });
     };
     function markerClick(e, info){
-    //window.alert(marker);
        map.setCenter(e.getPosition());
        info.open(map, e);
     }

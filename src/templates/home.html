@@ -14,7 +14,27 @@
            <h3 class="name">{{ list.name }}</h3>
       {%endfor%}
     </div>
+    <!-- <div style="visibility: visible" id="options">
+      <label for="title" class="label1">Title:</label>
+      <input type="text" class="input2" id="title" name="title" placeholder="Title Here">
+      <br>
+      <label for="description" class="label1">Description:</label>
+      <input type="text" class="input2" id="descripton" name="description" placeholder="Description Here">
+      <label for="tags" class="label1">Tags:</label>
+      <input type="text" class="input2" id="tags" name="tags" placeholder="Tags, separated by comma">
+    </div> -->
   </div>
+</div>
+<div>
+  <form action="" method="POST">
+    {{ form.csrf_token }}
+    <p id="title">{{form.title}}</p>
+    <p id="description">{{form.description}}</p>
+    <p id="tags">{{form.tags}}</p>
+    <p id="lat">{{form.lat}}</p>
+    <p id="lng">{{form.lng}}</p>
+    <input type="submit" value="send" id="complete">
+  </form>
 </div>
 
 {% endblock content %}

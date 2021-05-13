@@ -3,7 +3,7 @@ from flask import render_template, url_for, abort, request, redirect, flash, ses
 from flask_login import login_user, logout_user, current_user, login_required
 # from src.models import User, Product, Order, load_user
 from src.models import User,List,lists_landmarks,Landmark
-from src.forms import RegistrationForm, ReviewForm, LoginForm, CreatelistForm #EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
+from src.forms import RegistrationForm, ReviewForm, LoginForm, CreatelistForm, MarkerInfo #EditProductForm, CheckoutForm, PublishProductForm, UnpublishProductForm, DeleteProductForm, AllProductsForm, AddCartForm
 from werkzeug.utils import secure_filename
 import os
 import time
@@ -30,7 +30,13 @@ def home():
     #    addtocart(form)
 
     #seed(int(round(time.time() * 1000)))
+    form = MarkerInfo()
     lists = List.query.order_by(List.name)
+    if form.validate_on_submit():
+        landmark = landmark(name=form.name.data, description=form.description.data, 
+        tags=form.tags.data, lat=form.lat.data, lng=form.lng.data, userid=current_user.id)
+        db.session.add(user)
+        db.session.commit()
     # possible_choices = []
     # product_data = Product.query.filter_by(active=True)
     # for product in product_data:
@@ -38,7 +44,7 @@ def home():
     # chosen = choice(possible_choices)
     # product = Product.query.get_or_404(chosen)
     # return render_template('home.html', title='Home', product_data=product, addcartform=form)
-    return render_template('home.html', lists=lists)
+    return render_template('home.html', lists=lists, form=form)
     #, form=form)
 
 # @app.route("/about")

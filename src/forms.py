@@ -80,6 +80,53 @@ class CreatelistForm(FlaskForm):
 
     submit = SubmitField("CreateList")
 
+class MarkerInfo(FlaskForm):
+    title = StringField(
+        "Title",
+        validators=[
+            DataRequired(),
+            #validate_listname
+        ]
+    )
+    description = StringField(
+        "Description",
+        validators=[
+            DataRequired(),
+            #validate_listname
+        ]
+    )
+    tags = StringField(
+        "Title",
+        validators=[
+            DataRequired(),
+            #validate_listname
+        ]
+    )
+    lat = IntegerField(
+        "Latitude",
+        validators=[
+            DataRequired(),
+            #validate_listname
+        ]
+    )
+    lng = IntegerField(
+        "Longitude",
+        validators=[
+            DataRequired(),
+            #validate_listname
+        ]
+    )
+    userid = IntegerField(
+        "userid",
+        validators=[
+            DataRequired(),
+            #validate_listname
+        ]
+    )
+
+
+    submit = SubmitField("SendInfo")
+
 
 #class CheckoutForm(FlaskForm):
 #
